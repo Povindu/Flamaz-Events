@@ -8,9 +8,11 @@ import {
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import FlamezLogo from "../assets/flamezLogo.png";
 
+import { Link } from "react-router-dom";
+
 function NavList() {
   return (
-    <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+    <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6 font-poppins">
       <Typography
         as="li"
         variant="small"
@@ -20,12 +22,12 @@ function NavList() {
         onPointerEnterCapture={undefined}
         onPointerLeaveCapture={undefined}
       >
-        <a
-          href="#"
+        <Link
+          to="/"
           className="flex items-center text-black hover:text-amber-500 transition-colors"
         >
           Home
-        </a>
+        </Link>
       </Typography>
       <Typography
         as="li"
@@ -46,12 +48,12 @@ function NavList() {
         color="blue-gray"
         className="p-1 font-medium"
       >
-        <a
-          href="#"
+        <Link
+          to="/gallery"
           className="flex items-center text-black hover:text-amber-500 transition-colors"
         >
           Gallery
-        </a>
+        </Link>
       </Typography>
       <Typography
         as="li"

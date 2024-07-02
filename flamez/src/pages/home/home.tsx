@@ -4,6 +4,7 @@ import Footer from "../../components/Footer.tsx";
 import NavbarSimple from "../../components/NavbarSimple.tsx";
 import OurServices from "./sections/OurServices/OurServices.tsx";
 import OurClients from "./sections/OurClients/OurClients.tsx";
+import Testamonials from "./sections/Testamonials/Testamonials.tsx";
 
 export default function home() {
   return (
@@ -13,6 +14,7 @@ export default function home() {
       <WhatWeDo />
       <OurServices />
       <OurClients />
+      <Testamonials />
       <Footer />
     </div>
   );

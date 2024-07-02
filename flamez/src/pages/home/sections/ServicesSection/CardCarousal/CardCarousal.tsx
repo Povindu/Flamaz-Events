@@ -2,7 +2,7 @@ import React from "react";
 
 export default function CardCarousal() {
   return (
-    <div className="flex flex-col bg-white m-auto p-auto">
+    <div className="flex flex-col bg-white m-auto p-auto font-poppins">
       <h1 className="flex py-5 lg:mb-4 lg:mt-20 lg:mx-20 md:mx-20 mx-5 uppercase font-bold text-3xl text-gray-800">
         What we do
       </h1>

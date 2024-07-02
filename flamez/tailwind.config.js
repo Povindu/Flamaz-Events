@@ -5,7 +5,11 @@ export default {
   darkMode: "selector",
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}", flowbite.content()],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+         'poppins': ['Poppins'],
+      }
+   }
   },
   plugins: [require("daisyui"), flowbite.plugin()],
   daisyui: {

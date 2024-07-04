@@ -4,10 +4,11 @@ import {
   Collapse,
   Typography,
   IconButton,
+  Button,
 } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import FlamezLogo from "../assets/flamezLogo.png";
-
+import FlamezLogo from "../../assets/flamezLogo.png";
+import { useLogout } from "../../hooks/logout";
 import { Link } from "react-router-dom";
 
 function NavList() {
@@ -18,15 +19,12 @@ function NavList() {
         variant="small"
         color="blue-gray"
         className="p-1 font-medium"
-        placeholder={undefined}
-        onPointerEnterCapture={undefined}
-        onPointerLeaveCapture={undefined}
       >
         <Link
           to="/"
           className="flex items-center text-black hover:text-amber-500 transition-colors"
         >
-          Home
+          Dashboard
         </Link>
       </Typography>
       <Typography
@@ -35,11 +33,24 @@ function NavList() {
         color="blue-gray"
         className="p-1 font-medium"
       >
-        <Link
-          to="/services"
+        <a
+          href="#"
           className="flex items-center text-black hover:text-amber-500 transition-colors"
         >
           Services
+        </a>
+      </Typography>
+      <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-medium"
+      >
+        <Link
+          to="/gallery"
+          className="flex items-center text-black hover:text-amber-500 transition-colors"
+        >
+          Testamonials
         </Link>
       </Typography>
       <Typography
@@ -52,7 +63,7 @@ function NavList() {
           to="/gallery"
           className="flex items-center text-black hover:text-amber-500 transition-colors"
         >
-          Gallery
+          Clients
         </Link>
       </Typography>
       <Typography
@@ -61,31 +72,31 @@ function NavList() {
         color="blue-gray"
         className="p-1 font-medium"
       >
-        <a
-          href="#"
+        <Link
+          to="/gallery"
           className="flex items-center text-black hover:text-amber-500 transition-colors"
         >
-          About Us
-        </a>
-      </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-medium"
-      >
-        <a
-          href="#"
-          className="flex items-center text-black hover:text-amber-500 transition-colors"
-        >
-          Contact Us
-        </a>
+          Logout
+        </Link>
       </Typography>
     </ul>
   );
 }
 
-export default function NavbarSimple() {
+function NavListOpen() {
+  const { Logout } = useLogout();
+  const handleLogout = () => {
+    console.log("Logout");
+    Logout();
+  }
+  return (
+    <div>
+      <Button variant="filled" onClick={handleLogout}>Logout</Button>
+    </div>
+  );
+}
+
+export default function DashboardNavbar() {
   const [openNav, setOpenNav] = React.useState(false);
 
   const handleWindowResize = () =>
@@ -102,20 +113,15 @@ export default function NavbarSimple() {
   return (
     <Navbar
       className="mx-auto px-6 py-3"
-      placeholder=""
-      onPointerEnterCapture={() => {}}
-      onPointerLeaveCapture={() => {}}
     >
       <div className="flex items-center justify-between text-blue-gray-900">
-        <Link to="/">
-          <img src={FlamezLogo} alt="Flamez Logo" className="w-28 h-fit" />
-        </Link>
-        <div className="hidden lg:block">
-          <NavList />
+        <img src={FlamezLogo} alt="Flamez Logo" className="w-28 h-fit" />
+        <div className="hidden md:block">
+          <NavListOpen />
         </div>
         <IconButton
           variant="text"
-          className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-black lg:hidden"
+          className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-black md:hidden"
           ripple={false}
           onClick={() => setOpenNav(!openNav)}
         >

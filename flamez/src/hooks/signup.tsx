@@ -1,37 +1,38 @@
-import { baseUrl } from "../constants/constants";
-import axios from "axios";
 import { useUser } from "../context/authContext";
+import { baseUrl } from "../constants/constants";
+import { jwtDecode } from "jwt-decode";
+import axios from "axios";
 
-export const useLogin = () => {
-  const user = useUser();
+import { useNavigate } from "react-router-dom";
 
-  const login = async ({
+export const useSignup = () => {
+  const navigate = useNavigate();
+  // const user = useUser();
+  // console.log("user", user);
+
+  const Signup = async ({
+    firstName,
+    lastName,
     email,
     password,
   }: {
+    firstName: String;
+    lastName: String;
     email: String;
     password: String;
   }) => {
-    console.log(email, password);
-
     const res = await axios
-      .post(baseUrl + `/auth/signin`, {
+      .post(baseUrl + `/auth/signup`, {
+        firstName,
+        lastName,
         email,
         password,
       })
       .then((response) => {
-        console.log("data from use login", response.data);
-        localStorage.setItem(
-          "FLamezUserAT",
-          JSON.stringify(response.data.token)
-        );
-        localStorage.setItem(
-          "FLamezUserRT",
-          JSON.stringify(response.data.refreshToken)
-        );
-
-        user.setAuth(true);
+        console.log("data from use Signup", response.data);
+        localStorage.setItem("FLamezUser", JSON.stringify(response.data));
         console.log("response", response.status);
+        navigate("/login");
         return { status: "success", data: response.data, error: "" };
       })
       .catch((error) => {
@@ -53,5 +54,5 @@ export const useLogin = () => {
     return res;
   };
 
-  return { login };
+  return { Signup };
 };

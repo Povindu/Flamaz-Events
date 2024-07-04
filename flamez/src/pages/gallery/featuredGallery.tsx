@@ -42,7 +42,6 @@ export default function FeaturedImageGallery() {
     {
       imgelink: EventImage10,
     },
-
   ];
 
   const [active, setActive] = React.useState(EventImage1);

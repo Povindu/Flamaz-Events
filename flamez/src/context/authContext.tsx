@@ -1,66 +1,59 @@
 import { useState, createContext, useEffect, useContext } from "react";
-import api from "../services/AuthService";
-import Cookies from "js-cookie";
+// import api from "../services/AuthService";
 import { jwtDecode } from "jwt-decode";
 
 export const UserContext = createContext<any>(null);
 
 const UserProvider = ({ children }: any) => {
-  const [decodedValues, setDecodedValues] = useState<any>();
   const [userDetails, setUserDetails] = useState<any>({
     id: "",
     firstName: "",
     lastName: "",
-    role: "",
-    accessToken: "",
-    refreshTOken: "",
+    login: null,
   });
 
+  const [Auth, setAuth] = useState(false);
+
+  const setDataFunc = () => {
+    const token = localStorage.getItem("FLamezUserAT");
+    console.log("token", token);
+
+    const decoded: {
+      _id?: string;
+      fName?: string;
+      lName?: string;
+    } = token ? jwtDecode(token) : {};
+    // console.log("decoded", decoded);
+    if (decoded._id) {
+      console.log("decoded", decoded);
+      setUserDetails({
+        id: decoded._id || "",
+        firstName: decoded.fName || "",
+        lastName: decoded.lName || "",
+        login: true,
+      });
+    } else {
+      setUserDetails({
+        id: "",
+        firstName: "",
+        lastName: "",
+        login: false,
+      });
+    }
+  };
+
   useEffect(() => {
-    const token = Cookies.get("token");
-    const decoded = token ? jwtDecode(token) : undefined;
-    setDecodedValues(decoded);
+    setDataFunc();
   }, []);
 
-  // console.log("decodedValues", decodedValues);
-  // console.log("decodedValues", decodedValues?.userId);
-
-  const UserID = decodedValues?.userId;
-
   useEffect(() => {
-    try {
-      const fetchData = async () => {
-        if (UserID) {
-          // Check if t is not null
-          api
-            .get(`${process.env.REACT_APP_API_URL}api/getuser/${UserID}`)
-            .then((res) => {
-              console.log("dataaaaaaaaaa", res.data);
-              setUserDetails({
-                id: res.data.user_id,
-                firstName: res.data.firstname,
-                lastName: res.data.lastname,
-                role: res.data.role,
-                image: res.data.user_image,
-                // phoneNumbers: res.data.phone[0].phone_number,
-                discription: res.data.Discription,
-                achivements: res.data.achivements,
-              });
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        }
-      };
-      fetchData();
-    } catch (error) {
-      console.error("Error:", error);
-      // Handle error responses here if needed
-    }
-  }, [UserID]);
+    console.log("isAuthenticated", Auth);
+    console.log("userDetails", userDetails);
+    setDataFunc();
+  }, [Auth]);
 
   return (
-    <UserContext.Provider value={{ userDetails }}>
+    <UserContext.Provider value={{ userDetails, Auth, setAuth }}>
       {children}
     </UserContext.Provider>
   );

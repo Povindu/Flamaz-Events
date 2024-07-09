@@ -10,6 +10,7 @@ import {
 } from "react-icons/hi";
 import { Button } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 export default function Component() {
   return (
@@ -33,7 +34,11 @@ export default function Component() {
           </Sidebar.Item>
           <div className="flex justify-center">
             <Link to="/signup">
-              <Button variant="outlined" color="deep-orange" className="mt-5">
+              <Button
+                variant="outlined"
+                color="deep-orange"
+                className="mt-5"
+              >
                 Create Account
               </Button>
             </Link>

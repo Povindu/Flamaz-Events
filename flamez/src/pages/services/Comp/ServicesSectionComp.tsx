@@ -18,7 +18,11 @@ export default function ServicesSectionComp({
     <div className="p-5">
       <Card className="mt-6 w-full">
         <CardBody>
-          <Typography variant="h5" color="blue-gray" className="mb-5 text-xl  rounded-3xl py-1 pl-5 ">
+          <Typography
+            variant="h5"
+            color="blue-gray"
+            className="mb-5 text-xl  rounded-3xl py-1 pl-5 "
+          >
             {title}
           </Typography>
           <Typography className="mb-5 text-md pl-5 ">{description}</Typography>
@@ -45,4 +49,3 @@ export function DefaultGallery({ images }: { images: string[] }) {
     </div>
   );
 }
-

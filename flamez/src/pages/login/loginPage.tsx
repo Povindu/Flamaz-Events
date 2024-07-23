@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useLogin } from "../../hooks/login";
 import { Spinner } from "@material-tailwind/react";
-import { ToastContainer, toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../../context/authContext";
+
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const LoginPage = () => {

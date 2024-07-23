@@ -8,6 +8,8 @@ import DashTestamonials from "../pages/dashbaord/DashboardPages/DashTestamonials
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Services from "../pages/services/Services";
 
+import CreateService from "../pages/dashbaord/DashboardPages/Comp/CreateService";
+
 import AdminRoutes from "./AdminRoutes";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -32,6 +34,7 @@ const router = createBrowserRouter([
               { path: "services", element: <DashServices /> },
               { path: "testamonials", element: <DashTestamonials /> },
               { path: "clients", element: <DashClients /> },
+              { path: "createService", element: <CreateService /> },
             ],
           },
         ],

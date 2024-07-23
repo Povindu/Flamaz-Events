@@ -3,7 +3,7 @@ import { Card, Typography } from "@material-tailwind/react";
 const TABLE_HEAD = ["Title", "Description", "Photos", ""];
 
 export default function DefaultTable({ data }: { data: any }) {
-  console.log(data);
+  // console.log(data);
   return (
     <Card className="h-full overflow-scroll w-full font-poppins">
       <table className="w-full min-w-max table-auto text-center">

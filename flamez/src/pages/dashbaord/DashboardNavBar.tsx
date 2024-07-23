@@ -91,7 +91,7 @@ function NavListOpen() {
   }
   return (
     <div>
-      <Button variant="filled" onClick={handleLogout}>Logout</Button>
+      <Button variant="outlined" onClick={handleLogout}>Logout</Button>
     </div>
   );
 }

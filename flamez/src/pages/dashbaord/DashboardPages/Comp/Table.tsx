@@ -1,8 +1,10 @@
 import { Card, Typography } from "@material-tailwind/react";
+import { Link, useNavigate } from "react-router-dom";
 
 const TABLE_HEAD = ["Title", "Description", "Photos", ""];
 
 export default function DefaultTable({ data }: { data: any }) {
+  const navigate = useNavigate();
   // console.log(data);
   return (
     <Card className="h-full overflow-scroll w-full font-poppins">
@@ -22,10 +24,16 @@ export default function DefaultTable({ data }: { data: any }) {
           {data.map(
             (
               {
+                _id,
                 title,
                 description,
                 photoArray,
-              }: { title: string; description: string; photoArray: any[] },
+              }: {
+                _id: string;
+                title: string;
+                description: string;
+                photoArray: any[];
+              },
               index: number
             ) => {
               const isLast = index === data.length - 1;
@@ -64,15 +72,17 @@ export default function DefaultTable({ data }: { data: any }) {
                     </Typography>
                   </td>
                   <td className={classes}>
-                    <Typography
-                      as="a"
-                      href="#"
-                      variant="small"
-                      color="blue-gray"
-                      className="font-medium"
-                    >
-                      Edit
-                    </Typography>
+                    <Link to={`/dashboard/editService/${_id}`}>
+                      <Typography
+                        as="a"
+                        href="#"
+                        variant="small"
+                        color="blue-gray"
+                        className="font-medium"
+                      >
+                        Edit
+                      </Typography>
+                    </Link>
                   </td>
                 </tr>
               );

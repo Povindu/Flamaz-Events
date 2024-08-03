@@ -7,8 +7,9 @@ import DashClients from "../pages/dashbaord/DashboardPages/DashClients";
 import DashTestamonials from "../pages/dashbaord/DashboardPages/DashTestamonials";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Services from "../pages/services/Services";
-
 import CreateService from "../pages/dashbaord/DashboardPages/Comp/CreateService";
+import EditService from "../pages/dashbaord/DashboardPages/Comp/EditService";
+
 
 import AdminRoutes from "./AdminRoutes";
 
@@ -35,6 +36,8 @@ const router = createBrowserRouter([
               { path: "testamonials", element: <DashTestamonials /> },
               { path: "clients", element: <DashClients /> },
               { path: "createService", element: <CreateService /> },
+              { path: "editService/:id", element: <EditService /> },
+
             ],
           },
         ],

@@ -1,23 +1,53 @@
-import React from "react";
+import { useParams } from "react-router-dom";
 import api from "../../../../services/AuthService";
 import { useEffect, useState } from "react";
+import React from "react";
 import { Button, Card, Input, Typography } from "@material-tailwind/react";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function CreateService() {
+export default function EditService() {
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const [file, setFile] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [res, setRes] = useState<any>([]);
   const handleSelectFile = (e: any) => setFile(e.target.files[0]);
-
   const [photoArray, setPhotoArray] = useState<any>([]);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+
+  const [services, setServices] = useState<any>([]);
+
+  useEffect(() => {
+    console.log("id", id);
+    api
+      .get(`services/getOne/${id}`)
+      .then((response) => {
+        console.log(response.data);
+        setServices(response.data);
+        setTitle(response.data.title);
+        setDescription(response.data.description);
+        setRes([]);
+        if (response.data.photoArray) {
+          response.data?.photoArray?.map((r: any) => {
+            console.log(r);
+            setRes((res: any[]) => [...res, { url: r, secure_url: r }]);
+          });
+        }
+        // setPhotoArray(res.data.photoArray);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [id]);
+
+  useEffect(() => {
+    console.log("res", res);
+  }, [res]);
 
   const UploadComp = () => {
     const handleUpload = async () => {
@@ -82,7 +112,7 @@ export default function CreateService() {
             <div className="grid grid-cols-3 gap-1 mt-2">
               {/* {console.log(res)} */}
               {res.map((r: any) => (
-                <div key={r.public_id} className=" w-28 h-28 ">
+                <div key={r.secure_url} className=" w-28 h-28 ">
                   <img
                     src={r.secure_url}
                     alt=""
@@ -102,13 +132,15 @@ export default function CreateService() {
       return toast.warn("Please add a title");
     }
 
+    console.log(photoArray);
+
     res.map((r: any) => {
       photoArray.push(r.secure_url);
       console.log(photoArray);
     });
 
     api
-      .post("services/create", { title, description, photoArray })
+      .patch(`services/edit/${id}`, { title, description, photoArray })
       .then((res) => {
         if (res.data.error) {
           return toast.error(res.data.error);
@@ -116,9 +148,10 @@ export default function CreateService() {
         toast.success("Service added successfully");
       })
       .catch((err) => {
+        console.log(err);
         toast.error("An error occured");
       });
-    // console.log(title, description, res);
+    console.log(title, description, res);
   };
 
   return (
@@ -147,7 +180,7 @@ export default function CreateService() {
                 variant="h3"
                 className="text-lg font-semibold leading-10 text-gray-900"
               >
-                Add Service
+                Edit Service
               </Typography>
 
               <div>
@@ -208,7 +241,7 @@ export default function CreateService() {
             onClick={() => submitService()}
             className="inline-flex w-full justify-center rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 sm:ml-3 sm:w-auto"
           >
-            Add Service
+            Edit Service
           </button>
           <Link to="/dashboard/services">
             <button

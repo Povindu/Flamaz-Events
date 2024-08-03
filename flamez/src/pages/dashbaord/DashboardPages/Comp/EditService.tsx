@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import api from "../../../../services/AuthService";
 import { useEffect, useState } from "react";
 import { Button, Card, Input, Typography } from "@material-tailwind/react";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -13,18 +13,16 @@ export default function EditService() {
   const [loading, setLoading] = useState(false);
   const [res, setRes] = useState<any>([]);
   const handleSelectFile = (e: any) => setFile(e.target.files[0]);
-  const [photoArray, setPhotoArray] = useState<any>([]);
+  const [photoArray] = useState<any>([]);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
   const [services, setServices] = useState<any>([]);
 
-
   useEffect(() => {
     console.log("id", id);
     console.log("services", services);
-    
 
     api
       .get(`services/getOne/${id}`)

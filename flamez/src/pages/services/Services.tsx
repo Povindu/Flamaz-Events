@@ -1,5 +1,4 @@
 import NavbarSimple from "../../components/NavbarSimple";
-import ServicesSectionComp from "./Comp/ServicesSectionComp";
 import ServicesSectionComp2 from "./Comp/ReServicesSectionComp";
 
 import api from "../../services/AuthService";

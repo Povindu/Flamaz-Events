@@ -3,7 +3,6 @@ import {
   CardBody,
   Typography,
   CardHeader,
-  Avatar,
 } from "@material-tailwind/react";
 import fetchedUrl from "../../../assets/EventPhotos/Web Photos (1).jpg";
 interface Props {

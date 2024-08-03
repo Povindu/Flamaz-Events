@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@material-tailwind/react";
 import DefaultTable from "./Comp/Table";
 
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Services() {
   const navigate = useNavigate();
@@ -31,9 +31,9 @@ export default function Services() {
               variant="filled"
               className="float float-end"
               onClick={() => {
-                navigate("/dashboard/createService")
+                navigate("/dashboard/createService");
                 // console.log("clicked");
-            }}
+              }}
             >
               Add Service
             </Button>

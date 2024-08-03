@@ -1,15 +1,13 @@
 import { useParams } from "react-router-dom";
 import api from "../../../../services/AuthService";
 import { useEffect, useState } from "react";
-import React from "react";
 import { Button, Card, Input, Typography } from "@material-tailwind/react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function EditService() {
   const { id } = useParams();
-  const navigate = useNavigate();
 
   const [file, setFile] = useState<any>(null);
   const [loading, setLoading] = useState(false);
@@ -22,8 +20,12 @@ export default function EditService() {
 
   const [services, setServices] = useState<any>([]);
 
+
   useEffect(() => {
     console.log("id", id);
+    console.log("services", services);
+    
+
     api
       .get(`services/getOne/${id}`)
       .then((response) => {

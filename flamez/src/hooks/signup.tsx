@@ -1,8 +1,5 @@
-import { useUser } from "../context/authContext";
 import { baseUrl } from "../constants/constants";
-import { jwtDecode } from "jwt-decode";
 import axios from "axios";
-
 import { useNavigate } from "react-router-dom";
 
 export const useSignup = () => {

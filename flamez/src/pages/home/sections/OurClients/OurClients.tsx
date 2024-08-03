@@ -1,4 +1,3 @@
-import React from 'react'
 import Clients from "../../../../assets/SampleClients.png"
 export default function OurClients() {
   return (

@@ -1,17 +1,12 @@
 import { Sidebar } from "flowbite-react";
 import {
-  HiArrowSmRight,
   HiChartPie,
   HiInbox,
   HiShoppingBag,
   HiTable,
-  HiUser,
-  HiViewBoards,
 } from "react-icons/hi";
 import { Button } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
-
 export default function Component() {
   return (
     <Sidebar aria-label="Default sidebar example" className="w-fit m-auto">

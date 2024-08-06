@@ -2,10 +2,17 @@ import axios from "axios";
 // import { baseUrl } from "../constants/constants";
 const api = axios.create({
   baseURL: import.meta.env.BACKEND_URL,
+  headers: {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json",
+  },
 });
-// console.log("Backend URL", import.meta.env.VITE_BACKEND_URL);
+
 api.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
 // api.defaults.baseURL = baseUrl;
+
+
+
 
 // Add a request interceptor
 // api.interceptors.request.use(

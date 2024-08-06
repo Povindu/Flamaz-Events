@@ -1,5 +1,5 @@
-const base = "http://localhost";
+// const base = "http://localhost";
 
-const port = 4000;
+// const port = 4000;
 
-export const baseUrl = `${base}:${port}/api`;
+export const baseUrl = import.meta.env.BACKEND_URL;

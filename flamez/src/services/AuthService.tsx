@@ -1,10 +1,10 @@
 import axios from "axios";
 // import { baseUrl } from "../constants/constants";
 const api = axios.create({
-  baseURL: 'http://localhost:4000/api',
+  baseURL: import.meta.env.BACKEND_URL,
 });
-
-// api.defaults.baseURL = 'http://localhost:4000/api';
+// console.log("Backend URL", import.meta.env.VITE_BACKEND_URL);
+api.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
 // api.defaults.baseURL = baseUrl;
 
 // Add a request interceptor

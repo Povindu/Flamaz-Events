@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 
 export default function Services() {
   const [services, setServices] = useState<any>([]);
+  console.log()
   useEffect(() => {
     api
       .get("services/getAll")
@@ -21,6 +22,7 @@ export default function Services() {
   return (
     <div>
       <NavbarSimple />
+      {console.log(services)}
       {services.length > 0 &&
         services.map(
           (

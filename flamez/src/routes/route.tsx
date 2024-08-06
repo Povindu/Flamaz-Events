@@ -10,7 +10,6 @@ import Services from "../pages/services/Services";
 import CreateService from "../pages/dashbaord/DashboardPages/Comp/CreateService";
 import EditService from "../pages/dashbaord/DashboardPages/Comp/EditService";
 
-
 import AdminRoutes from "./AdminRoutes";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -37,7 +36,6 @@ const router = createBrowserRouter([
               { path: "clients", element: <DashClients /> },
               { path: "createService", element: <CreateService /> },
               { path: "editService/:id", element: <EditService /> },
-
             ],
           },
         ],

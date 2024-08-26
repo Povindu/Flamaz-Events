@@ -1,10 +1,24 @@
 import { Card, Typography } from "@material-tailwind/react";
 import { Link, useNavigate } from "react-router-dom";
-
-const TABLE_HEAD = ["Title", "Description", "Photos", ""];
+import api from "../../../../services/AuthService";
+const TABLE_HEAD = ["Title", "Description", "Photos", "", ""];
 
 export default function DefaultTable({ data }: { data: any }) {
   const navigate = useNavigate();
+
+  const handleDelete = async (id: string) => {
+    console.log("id", id);
+    const res = await api
+      .delete(`services/delete/${id}`)
+      .then((res) => {
+        console.log(res.data);
+        navigate("/dashboard");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   // console.log(data);
   return (
     <Card className="h-full overflow-scroll w-full font-poppins">
@@ -83,6 +97,18 @@ export default function DefaultTable({ data }: { data: any }) {
                         Edit
                       </Typography>
                     </Link>
+                  </td>
+                  <td className={classes}>
+                    <Typography
+                      onClick={() => handleDelete(_id)}
+                      as="a"
+                      href="#"
+                      variant="small"
+                      color="blue-gray"
+                      className="font-medium"
+                    >
+                      Delete
+                    </Typography>
                   </td>
                 </tr>
               );

@@ -6,8 +6,8 @@ export default function CardCarousal() {
       <h1 className="flex py-5 lg:mb-4 lg:mt-20 lg:mx-20 md:mx-20 mx-5 uppercase font-bold text-3xl text-gray-800">
         What we do
       </h1>
-      <div className="flex overflow-hidden pb-10 card-carousal-hide-scroll-bar no-scrollbar ">
-        <div className="flex flex-nowrap lg:ml-16 md:ml-20 ml-10 text-center text-xl">
+      <div className="flex overflow-scroll pb-10 lg:card-carousal-hide-scroll-bar lg:no-scrollbar">
+        <div className="flex flex-nowrap lg:ml-5 md:ml-5 ml-5 text-center text-xl">
           <div className="inline-block px-5">
             <div className="w-60 h-60 max-w-xs overflow-hidden rounded-lg shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out">
               <img

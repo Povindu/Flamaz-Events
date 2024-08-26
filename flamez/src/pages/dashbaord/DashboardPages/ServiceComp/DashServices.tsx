@@ -1,7 +1,7 @@
-import api from "../../../services/AuthService";
+import api from "../../../../services/AuthService";
 import { useEffect, useState } from "react";
 import { Button } from "@material-tailwind/react";
-import DefaultTable from "./Comp/Table";
+import DefaultTable from "../Comp/Table";
 
 import { useNavigate } from "react-router-dom";
 

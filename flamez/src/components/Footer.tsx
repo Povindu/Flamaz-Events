@@ -5,28 +5,25 @@ import FlamezLogo from "../assets/flamezLogo.png";
 
 export default function footer() {
   return (
-    <div className="bg-zinc-900 text-white text-sm h-72 pt-12 font-poppins">
-      <div className="grid grid-cols-4 text-center align-middle mb-10">
+    <div className="bg-zinc-900 text-white lg:h-72 text-sm pt-12 font-poppins ">
+      <div className="grid lg:grid-cols-3 grid-row-3 text-center align-middle mb-10">
         <div className="pt-12 text-lg">
-          <img src={FlamezLogo} alt="Flamez Logo" className="w-28 h-fit m-auto" />
+          <img
+            src={FlamezLogo}
+            alt="Flamez Logo"
+            className="w-28 h-fit m-auto"
+          />
           <p className="w-full m-auto leading-5">
             <span className="text-amber-500">Flamez</span> Events & <br />
             Entertainment
           </p>
-          
         </div>
-        <div className="pt-12">
-          Lorem ipsum dolor amet, consectetur adipiscing elit. Eget nisl nunc
-          quam ac sed turpis volutpat. Cursus sed massa non nisi, placerat.
-          (Slogan)
-        </div>
-        <div className="pt-6">
-          <h3 className="font-semibold mb-3">Helpful Links</h3>
-          <ul>
-            <li>Link 1</li>
-            <li className="pt-1">Link 2</li>
-            <li className="pt-1">Link 3</li>
-          </ul>
+        <div className="pt-12 md:w-full w-[85%] mx-auto">
+          Flamez Events & Entertainment is a full-service event management
+          company that specializes in creating memorable experiences for
+          corporate and private clients. Our team of experienced professionals
+          will work with you to plan, design, and execute events that exceed
+          your expectations.
         </div>
         <div className="pt-6">
           <h3 className="font-semibold mb-3">Reach us</h3>

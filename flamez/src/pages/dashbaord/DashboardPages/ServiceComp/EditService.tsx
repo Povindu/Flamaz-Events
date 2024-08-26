@@ -146,6 +146,7 @@ export default function EditService() {
           return toast.error(res.data.error);
         }
         toast.success("Service added successfully");
+        
       })
       .catch((err) => {
         console.log(err);

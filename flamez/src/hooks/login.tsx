@@ -36,11 +36,20 @@ export const useLogin = () => {
       })
       .catch((error) => {
         console.log("error", error);
-        console.log(
-          error.response == undefined
-            ? "An error occured"
-            : error.response?.data.error
-        );
+        // console.log(
+        //   error.response == undefined
+        //     ? "An error occured"
+        //     : error.response?.data.error
+        // );
+        // console.log("error", error.response.status);
+        if(error.response.status === 404){
+          return {
+            status: "error",
+            data: "",
+            error:
+              "Internal Server Error",
+          };
+        }
         return {
           status: "error",
           data: "",

@@ -38,8 +38,8 @@ export default function DefaultTable({ data }: { data: any }) {
             ) => {
               const isLast = index === data.length - 1;
               const classes = isLast
-                ? "p-4"
-                : "p-4 border-b border-blue-gray-50";
+                ? "p-3"
+                : "p-3 border-b border-blue-gray-50";
 
               return (
                 <tr key={title}>

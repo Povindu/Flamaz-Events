@@ -4,7 +4,6 @@ import {
   Typography,
   CardHeader,
 } from "@material-tailwind/react";
-import fetchedUrl from "../../../assets/EventPhotos/Web Photos (1).jpg";
 interface Props {
   title: string;
   description: string;
@@ -22,31 +21,20 @@ export default function ServicesSectionComp({
   return (
     <Card
       shadow={false}
-      className="relative grid h-fill lg:h-[400px] w-full justify-center overflow-hidden text-center rounded-none font-poppins"
+      className="relative grid h-fill lg:h-[400px] w-full justify-center overflow-hidden text-center rounded-none font-poppins border-y border-0 border-gray-200"
     >
-      <CardHeader
-        floated={false}
-        shadow={false}
-        color="transparent"
-        style={{
-          backgroundImage: `url(${imageLinks[0] || fetchedUrl})`,
-        }}
-        className="absolute inset-0 m-0 h-full w-ful rounded-none bg-[image:var(--image-url)] bg-cover bg-center"
-      >
-        <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-r from-black/80 via-black/70 to-black/30 " />
-      </CardHeader>
-      <CardBody className="w-full relative flex flex-col lg:flex-row align-middle ">
-        <div className="w-full lg:w-[500px] h-full flex flex-col justify-center">
+      <CardBody className="w-full relative flex flex-col lg:flex-row align-middle">
+        <div className="w-full lg:w-[500px] h-full flex flex-col justify-center ">
           <Typography
             variant="h2"
-            color="white"
+            color="black"
             className="mb-6 text-5xl uppercase"
           >
             {title}
           </Typography>
-          <Typography className="mb-4 text-gray-200">{description}</Typography>
+          <Typography className="mb-4 p-4 text-gray-800">{description}</Typography>
         </div>
-        <div className="flex w-full justify-center lg:w-[900px] h-full">
+        <div className="flex w-full justify-center lg:w-[900px] h-full ml-4">
           <DefaultGallery images={imageLinks} />
         </div>
       </CardBody>

@@ -3,10 +3,12 @@ import { useSignup } from "../../hooks/signup";
 import { Spinner } from "@material-tailwind/react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Link } from "react-router-dom";
+
+import { Link, useNavigate } from "react-router-dom";
 
 const SignupPage = () => {
   const { Signup } = useSignup();
+  const navigate = useNavigate();
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -26,6 +28,14 @@ const SignupPage = () => {
       toast.warn("Please fill all the fields");
       return;
     }
+    if( email === "" || !email.includes("@") || !email.includes(".")){
+      toast.warn("Please enter a valid email address");
+      return;
+    }
+    if(password.length < 6){
+      toast.warn("Password must be at least 6 characters");
+      return;
+    }
     if (password !== confirmPassword) {
       toast.warn("Passwords do not match");
       return;
@@ -39,12 +49,13 @@ const SignupPage = () => {
       password: password,
     });
 
-    // console.log("SignupMsg", SignupMsg.error);
+    console.log("SignupMsg", SignupMsg.error);
 
     if (SignupMsg.error) {
       toast.error(SignupMsg.error);
     } else {
       toast.success("Signup Successful");
+      // navigate("/login");
     }
     setLoading(false);
   };
@@ -135,7 +146,6 @@ const SignupPage = () => {
             </div>
 
             <div className="mt-4 flex items-center w-full text-center">
-              =
               <Link
                 to="/login"
                 className="text-xs text-gray-500 capitalize text-center w-full"

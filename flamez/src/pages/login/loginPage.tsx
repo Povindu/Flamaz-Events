@@ -31,8 +31,9 @@ const LoginPage = () => {
     }
 
     setLoading(true);
+    console.log("email", email);
     const loginMsg = await login({ email: email, password: password });
-    console.log("loginMsg", loginMsg.error);
+    console.log("loginMsg", loginMsg);
     if (loginMsg.error) {
       toast.error(loginMsg.error);
     } else {

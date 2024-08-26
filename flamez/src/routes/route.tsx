@@ -2,13 +2,13 @@ import Home from "../pages/home/home";
 import Login from "../pages/login/loginPage";
 import Signup from "../pages/Signup/SignupPage";
 import Gallery from "../pages/gallery/galleryPage";
-import DashServices from "../pages/dashbaord/DashboardPages/DashServices";
+import DashServices from "../pages/dashbaord/DashboardPages/ServiceComp/DashServices";
 import DashClients from "../pages/dashbaord/DashboardPages/DashClients";
 import DashTestamonials from "../pages/dashbaord/DashboardPages/DashTestamonials";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Services from "../pages/services/Services";
-import CreateService from "../pages/dashbaord/DashboardPages/Comp/CreateService";
-import EditService from "../pages/dashbaord/DashboardPages/Comp/EditService";
+import CreateService from "../pages/dashbaord/DashboardPages/ServiceComp/CreateService";
+import EditService from "../pages/dashbaord/DashboardPages/ServiceComp/EditService";
 
 import AdminRoutes from "./AdminRoutes";
 

@@ -33,9 +33,9 @@ export const useSignup = () => {
         return { status: "success", data: response.data, error: "" };
       })
       .catch((error) => {
-        console.log("error", error);
+        console.log("error", error.response.data);
         console.log(
-          error.response == undefined
+          error.response.data == (undefined || "")
             ? "An error occured"
             : error.response?.data.error
         );
@@ -43,7 +43,7 @@ export const useSignup = () => {
           status: "error",
           data: "",
           error:
-            error.response == undefined
+            error.response.data == (undefined || "")
               ? "An error occured"
               : error.response?.data.error,
         };

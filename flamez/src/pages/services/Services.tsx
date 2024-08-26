@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 export default function Services() {
   const [services, setServices] = useState<any>([]);
-  console.log()
+  console.log();
   useEffect(() => {
     api
       .get("services/getAll")

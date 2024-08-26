@@ -50,10 +50,12 @@ export default function EditService() {
   }, [res]);
 
   const UploadComp = () => {
+    
     const handleUpload = async () => {
       try {
         setLoading(true);
         const data = new FormData();
+        console.log(file);
         if (!file) throw new Error("no file selected");
         data.append("my_file", file);
         const res2 = await api.post("/upload", data);
@@ -113,6 +115,27 @@ export default function EditService() {
               {/* {console.log(res)} */}
               {res.map((r: any) => (
                 <div key={r.secure_url} className=" w-28 h-28 ">
+                  <button
+                    onClick={() => {
+                      setRes(res.filter((item: any) => item !== r));
+                    }}
+                    className="absolute bg-gray-200 rounded-full p-1 -m-2"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={2}
+                      stroke="currentColor"
+                      className="size-5"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </button>
                   <img
                     src={r.secure_url}
                     alt=""
@@ -146,7 +169,6 @@ export default function EditService() {
           return toast.error(res.data.error);
         }
         toast.success("Service added successfully");
-        
       })
       .catch((err) => {
         console.log(err);

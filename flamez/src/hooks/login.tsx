@@ -15,7 +15,7 @@ export const useLogin = () => {
     console.log(email, password);
 
     const res = await axios
-      .post(baseUrl + `/auth/signin`, {
+      .post(baseUrl + `auth/signin`, {
         email,
         password,
       })

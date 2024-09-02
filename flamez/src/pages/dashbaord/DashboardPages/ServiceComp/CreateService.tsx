@@ -26,7 +26,7 @@ export default function CreateService() {
         const data = new FormData();
         if (!file) throw new Error("no file selected");
         data.append("my_file", file);
-        const res2 = await api.post("/upload", data);
+        const res2 = await api.post("upload", data);
         setRes((res: any[]) => [...res, res2.data]);
         setFile(null);
       } catch (error: any) {

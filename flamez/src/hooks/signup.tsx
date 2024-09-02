@@ -19,7 +19,7 @@ export const useSignup = () => {
     password: String;
   }) => {
     const res = await axios
-      .post(baseUrl + `/auth/signup`, {
+      .post(baseUrl + `auth/signup`, {
         firstName,
         lastName,
         email,

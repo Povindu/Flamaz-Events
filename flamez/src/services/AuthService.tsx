@@ -8,6 +8,8 @@ const api = axios.create({
   // },
 });
 
+
+
 api.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
 // api.defaults.baseURL = baseUrl;
 

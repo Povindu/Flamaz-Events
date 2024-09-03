@@ -2,39 +2,51 @@ export default function OurClients() {
   const data = [
     {
       imageLink:
-        "https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+        "https://res.cloudinary.com/dqurl8r48/image/upload/v1725362774/Clients/xziedqb2kew6lowjta82.jpg",
     },
     {
       imageLink:
-        "https://images.unsplash.com/photo-1432462770865-65b70566d673?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80",
+        "https://res.cloudinary.com/dqurl8r48/image/upload/v1725362774/Clients/bubihcqnojis8ppwr8ad.jpg",
     },
     {
       imageLink:
-        "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2560&q=80",
+        "https://res.cloudinary.com/dqurl8r48/image/upload/v1725362774/Clients/akwieqysqfusanclphfx.jpg",
     },
     {
       imageLink:
-        "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80",
+        "https://res.cloudinary.com/dqurl8r48/image/upload/v1725362774/Clients/hsybsrsslvdxnjz5xtqr.jpg",
     },
     {
       imageLink:
-        "https://images.unsplash.com/photo-1518623489648-a173ef7824f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2762&q=80",
+        "https://res.cloudinary.com/dqurl8r48/image/upload/v1725362774/Clients/nl17zgt4f6glkcjiu8qf.jpg",
     },
     {
       imageLink:
-        "https://images.unsplash.com/photo-1682407186023-12c70a4a35e0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2832&q=80",
+        "https://res.cloudinary.com/dqurl8r48/image/upload/v1725362774/Clients/oi3qrblxpnlhshmhwffn.jpg",
     },
     {
       imageLink:
-        "https://demos.creative-tim.com/material-kit-pro/assets/img/examples/blog5.jpg",
+        "https://res.cloudinary.com/dqurl8r48/image/upload/v1725362774/Clients/m7pxhwraukljwj6bphlx.jpg",
     },
     {
       imageLink:
-        "https://material-taillwind-pro-ct-tailwind-team.vercel.app/img/content2.jpg",
+        "https://res.cloudinary.com/dqurl8r48/image/upload/v1725362774/Clients/efsmagmmue5zdegnr6iw.jpg",
     },
     {
       imageLink:
-        "https://images.unsplash.com/photo-1620064916958-605375619af8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1493&q=80",
+        "https://res.cloudinary.com/dqurl8r48/image/upload/v1725362774/Clients/yiqg19ogxpkvsjdmidoq.jpg",
+    },
+    {
+      imageLink:
+        "https://res.cloudinary.com/dqurl8r48/image/upload/v1725362774/Clients/jkbxmyd4koedprlphpsm.jpg",
+    },
+    {
+      imageLink:
+        "https://res.cloudinary.com/dqurl8r48/image/upload/v1725362774/Clients/r6kszgtfm8nvsa2demas.jpg",
+    },
+    {
+      imageLink:
+        "https://res.cloudinary.com/dqurl8r48/image/upload/v1725362774/Clients/lcrarmh3i87htrr7etqc.jpg",
     },
   ];
 
@@ -49,7 +61,7 @@ export default function OurClients() {
           {data.map(({ imageLink }, index) => (
             <div key={index}>
               <img
-                className="h-40 w-full max-w-full rounded-lg object-cover object-center"
+                className="h-40 w-full max-w-full rounded-lg object-contain object-center"
                 src={imageLink}
                 alt="gallery-photo"
               />

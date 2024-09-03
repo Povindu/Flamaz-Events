@@ -49,7 +49,7 @@ const SignupPage = () => {
       password: password,
     });
 
-    console.log("SignupMsg", SignupMsg.error);
+    
 
     if (SignupMsg.error) {
       toast.error(SignupMsg.error);

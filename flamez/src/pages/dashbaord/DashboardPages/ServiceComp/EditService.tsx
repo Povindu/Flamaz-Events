@@ -21,33 +21,24 @@ export default function EditService() {
   const [services, setServices] = useState<any>([]);
 
   useEffect(() => {
-    console.log("id", id);
-    console.log("services", services);
-
     api
       .get(`services/getOne/${id}`)
       .then((response) => {
-        console.log(response.data);
         setServices(response.data);
         setTitle(response.data.title);
         setDescription(response.data.description);
         setRes([]);
         if (response.data.photoArray) {
           response.data?.photoArray?.map((r: any) => {
-            console.log(r);
             setRes((res: any[]) => [...res, { url: r, secure_url: r }]);
           });
         }
         // setPhotoArray(res.data.photoArray);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, [id]);
 
-  useEffect(() => {
-    console.log("res", res);
-  }, [res]);
+  useEffect(() => {}, [res]);
 
   const UploadComp = () => {
     const handleUpload = async () => {
@@ -61,7 +52,6 @@ export default function EditService() {
         setFile(null);
       } catch (error: any) {
         alert(error.message);
-        console.log(error);
       } finally {
         setLoading(false);
       }
@@ -110,7 +100,6 @@ export default function EditService() {
               Uploaded files
             </Typography>
             <div className="grid grid-cols-3 gap-1 mt-2">
-              {/* {console.log(res)} */}
               {res.map((r: any) => (
                 <div key={r.secure_url} className=" w-28 h-28 ">
                   <img
@@ -132,11 +121,8 @@ export default function EditService() {
       return toast.warn("Please add a title");
     }
 
-    console.log(photoArray);
-
     res.map((r: any) => {
       photoArray.push(r.secure_url);
-      console.log(photoArray);
     });
 
     api
@@ -146,13 +132,10 @@ export default function EditService() {
           return toast.error(res.data.error);
         }
         toast.success("Service added successfully");
-        
       })
       .catch((err) => {
-        console.log(err);
         toast.error("An error occured");
       });
-    console.log(title, description, res);
   };
 
   return (

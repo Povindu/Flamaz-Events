@@ -9,7 +9,7 @@ export default function AdminRoutes() {
 
   const statusFunc = async () => {
     setStatus(user.userDetails.login);
-    console.log(user.userDetails)
+    
   };
 
   
@@ -20,11 +20,11 @@ export default function AdminRoutes() {
 
   useEffect(() => {
     statusFunc();
-    console.log("user", user);
+    
   }, [user]);
 
   useEffect(() => {
-    console.log("status", status);
+    
   }, [status]);
 
   while (status == "default" || status == null) {

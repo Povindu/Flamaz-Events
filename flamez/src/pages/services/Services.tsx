@@ -6,23 +6,23 @@ import { useEffect, useState } from "react";
 
 export default function Services() {
   const [services, setServices] = useState<any>([]);
-  console.log();
+  
   useEffect(() => {
     api
       .get("services/getAll")
       .then((res) => {
-        console.log(res.data);
+        
         setServices(res.data);
       })
       .catch((err) => {
-        console.log(err);
+        
       });
   }, []);
 
   return (
     <div>
       <NavbarSimple />
-      {console.log(services)}
+      
       {services.length > 0 &&
         services.map(
           (

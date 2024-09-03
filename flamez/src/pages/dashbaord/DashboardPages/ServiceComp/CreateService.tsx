@@ -31,7 +31,7 @@ export default function CreateService() {
         setFile(null);
       } catch (error: any) {
         alert(error.message);
-        console.log(error);
+        
       } finally {
         setLoading(false);
       }
@@ -80,7 +80,6 @@ export default function CreateService() {
               Uploaded files
             </Typography>
             <div className="grid grid-cols-3 gap-1 mt-2">
-              {/* {console.log(res)} */}
               {res.map((r: any) => (
                 <div key={r.public_id} className=" w-28 h-28 ">
                   <img
@@ -104,7 +103,7 @@ export default function CreateService() {
 
     res.map((r: any) => {
       photoArray.push(r.secure_url);
-      console.log(photoArray);
+      
     });
 
     api
@@ -118,7 +117,7 @@ export default function CreateService() {
       .catch((err) => {
         toast.error("An error occured");
       });
-    // console.log(title, description, res);
+    // 
   };
 
   return (

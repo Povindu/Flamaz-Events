@@ -17,9 +17,9 @@ const LoginPage = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    console.log("user", user);
+    
     if(user.userDetails.id !== ''){
-      console.log("user", user);
+      
       navigate("/dashboard");
     }
   }, [user]);
@@ -31,14 +31,14 @@ const LoginPage = () => {
     }
 
     setLoading(true);
-    console.log("email", email);
+    
     const loginMsg = await login({ email: email, password: password });
-    console.log("loginMsg", loginMsg);
+    
     if (loginMsg.error) {
       toast.error(loginMsg.error);
     } else {
       toast.success("Login Successful");
-      console.log("user", user);
+      
       while (user.userDetails.id == null) {
         return <div>Loading...</div>;
       }

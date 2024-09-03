@@ -11,9 +11,9 @@ export default function ServicesSectionComp({
   description,
   imageLinks,
 }: Props) {
-  console.log("title", title);
-  console.log("description", description);
-  console.log("imageLinks", imageLinks);
+  
+  
+  
   return (
     <div className="p-5">
       <Card className="mt-6 w-full">
@@ -34,7 +34,7 @@ export default function ServicesSectionComp({
 }
 
 export function DefaultGallery({ images }: { images: string[] }) {
-  console.log("images", images[0]);
+  
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
       {images.map((image, index) => (

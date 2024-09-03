@@ -1,10 +1,5 @@
 import { Sidebar } from "flowbite-react";
-import {
-  HiChartPie,
-  HiInbox,
-  HiShoppingBag,
-  HiTable,
-} from "react-icons/hi";
+import { HiChartPie, HiInbox, HiShoppingBag, HiTable } from "react-icons/hi";
 import { Button } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 export default function Component() {
@@ -29,11 +24,7 @@ export default function Component() {
           </Sidebar.Item>
           <div className="flex justify-center">
             <Link to="/signup">
-              <Button
-                variant="outlined"
-                color="deep-orange"
-                className="mt-5"
-              >
+              <Button variant="outlined" color="deep-orange" className="mt-5">
                 Create Account
               </Button>
             </Link>

@@ -86,12 +86,13 @@ function NavList() {
 function NavListOpen() {
   const { Logout } = useLogout();
   const handleLogout = () => {
-    console.log("Logout");
     Logout();
-  }
+  };
   return (
     <div>
-      <Button variant="outlined" onClick={handleLogout}>Logout</Button>
+      <Button variant="outlined" onClick={handleLogout}>
+        Logout
+      </Button>
     </div>
   );
 }
@@ -111,9 +112,7 @@ export default function DashboardNavbar() {
   }, []);
 
   return (
-    <Navbar
-      className="mx-auto px-6 py-3"
-    >
+    <Navbar className="mx-auto px-6 py-3">
       <div className="flex items-center justify-between text-blue-gray-900">
         <img src={FlamezLogo} alt="Flamez Logo" className="w-28 h-fit" />
         <div className="hidden md:block">

@@ -16,16 +16,16 @@ const UserProvider = ({ children }: any) => {
 
   const setDataFunc = () => {
     const token = localStorage.getItem("FLamezUserAT");
-    console.log("token", token);
+    //
 
     const decoded: {
       _id?: string;
       fName?: string;
       lName?: string;
     } = token ? jwtDecode(token) : {};
-    // console.log("decoded", decoded);
+    // 
     if (decoded._id) {
-      console.log("decoded", decoded);
+      
       setUserDetails({
         id: decoded._id || "",
         firstName: decoded.fName || "",
@@ -47,8 +47,8 @@ const UserProvider = ({ children }: any) => {
   }, []);
 
   useEffect(() => {
-    console.log("isAuthenticated", Auth);
-    console.log("userDetails", userDetails);
+    
+    
     setDataFunc();
   }, [Auth]);
 

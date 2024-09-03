@@ -18,9 +18,6 @@ function NavList() {
         variant="small"
         color="blue-gray"
         className="p-1 font-medium"
-        placeholder={undefined}
-        onPointerEnterCapture={undefined}
-        onPointerLeaveCapture={undefined}
       >
         <Link
           to="/"
@@ -103,8 +100,6 @@ export default function NavbarSimple() {
     <Navbar
       className="mx-auto px-6 py-3"
       placeholder=""
-      onPointerEnterCapture={() => {}}
-      onPointerLeaveCapture={() => {}}
     >
       <div className="flex items-center justify-between text-blue-gray-900">
         <Link to="/">

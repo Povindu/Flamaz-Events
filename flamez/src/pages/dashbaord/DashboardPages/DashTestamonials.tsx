@@ -13,11 +13,11 @@ export default function Testamonials() {
     api
       .get("Testamonials/getAll")
       .then((res) => {
-        console.log(res.data);
+        
         setTestamonials(res.data);
       })
       .catch((err) => {
-        console.log(err);
+        
       });
   }, []);
 
@@ -32,7 +32,7 @@ export default function Testamonials() {
               className="float float-end"
               onClick={() => {
                 navigate("/dashboard/createService");
-                // console.log("clicked");
+                // 
               }}
             >
               Add Service

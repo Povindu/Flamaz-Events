@@ -13,11 +13,11 @@ export default function Services() {
     api
       .get("services/getAll")
       .then((res) => {
-        console.log(res.data);
+        
         setServices(res.data);
       })
       .catch((err) => {
-        console.log(err);
+        
       });
   }, []);
 
@@ -32,7 +32,7 @@ export default function Services() {
               className="float float-end"
               onClick={() => {
                 navigate("/dashboard/createService");
-                // console.log("clicked");
+                // 
               }}
             >
               Add Service

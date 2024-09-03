@@ -7,19 +7,19 @@ export default function DefaultTable({ data }: { data: any }) {
   const navigate = useNavigate();
 
   const handleDelete = async (id: string) => {
-    console.log("id", id);
+    
     const res = await api
       .delete(`services/delete/${id}`)
       .then((res) => {
-        console.log(res.data);
+        
         navigate("/dashboard");
       })
       .catch((err) => {
-        console.log(err);
+        
       });
   };
 
-  // console.log(data);
+  // 
   return (
     <Card className="h-full overflow-scroll w-full font-poppins">
       <table className="w-full min-w-max table-auto text-center">

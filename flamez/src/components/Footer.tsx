@@ -5,7 +5,7 @@ import FlamezLogo from "../assets/flamezLogo.png";
 
 export default function footer() {
   return (
-    <div className="bg-zinc-900 text-white lg:h-72 text-sm pt-12 font-poppins ">
+    <div className="bg-zinc-900 text-white h-[900px] lg:h-72 text-sm pt-12 font-poppins">
       <div className="grid lg:grid-cols-3 grid-row-3 text-center align-middle mb-10">
         <div className="pt-12 text-lg">
           <img

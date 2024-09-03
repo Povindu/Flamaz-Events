@@ -25,14 +25,13 @@ export default function ServicesSectionComp({
     >
       <CardBody className="w-full relative flex flex-col lg:flex-row align-middle">
         <div className="w-full lg:w-[500px] h-full flex flex-col justify-center ">
-          <Typography
-            variant="h2"
-            color="black"
-            className="mb-6 text-5xl uppercase"
-          >
+          <Typography variant="h2" color="black" className="mb-6 text-2xl">
             {title}
           </Typography>
-          <Typography className="mb-4 p-4 text-gray-800">{description}</Typography>
+          <Typography className="mb-4 p-4 text-base text-gray-800">
+            {description.substring(0, 400)}
+            {description.length > 400 && "..."}
+          </Typography>
         </div>
         <div className="flex w-full justify-center lg:w-[900px] h-full ml-4">
           <DefaultGallery images={imageLinks} />

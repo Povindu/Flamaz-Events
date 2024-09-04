@@ -5,13 +5,13 @@ import FlamezLogo from "../assets/flamezLogo.png";
 
 export default function footer() {
   return (
-    <div className="bg-zinc-900 text-white h-[900px] lg:h-72 text-sm pt-12 font-poppins">
+    <div className="bg-zinc-900 text-white  text-sm pt-12 font-poppins">
       <div className="grid lg:grid-cols-3 grid-row-3 text-center align-middle mb-10">
         <div className="pt-12 text-lg">
           <img
             src={FlamezLogo}
             alt="Flamez Logo"
-            className="w-28 h-fit m-auto"
+            className="w-28 m-auto"
           />
           <p className="w-full m-auto leading-5">
             <span className="text-amber-500">Flamez</span> Events & <br />

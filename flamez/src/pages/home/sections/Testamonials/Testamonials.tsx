@@ -58,7 +58,7 @@ const data = [
 export default function Testamonials() {
   return (
     <div>
-      <section className=" dark:bg-gray-100 dark:text-gray-800 mt-24">
+      <section className=" text-gray-800 mt-24">
         <div className="container flex flex-col items-center mx-auto md:p-10 md:px-12">
           <h1 className="text-4xl text-center font-bold mb-5">
             Customer <span className="text-amber-500">Testamonials</span>
@@ -70,8 +70,8 @@ export default function Testamonials() {
               className="flex flex-col max-w-sm mx-1 my-3 shadow-lg  "
               key={index}
             >
-              <div className="px-1 pt-6 pb-1 rounded-t-lg :bg-gray-50 lg:h-60">
-                <p className="relative px-3 py-1 text-sm italic text-center  text-gray-800">
+              <div className="px-1 pt-6 pb-1 rounded-t-lg :bg-gray-50 h-60">
+                <p className="relative px-3 py-1 text-sm italic text-center text-gray-800">
                   {testimonial.testimonial.substring(0, 400)}
                   {testimonial.testimonial.length > 400 && "..."}
                 </p>

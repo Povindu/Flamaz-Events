@@ -99,11 +99,10 @@ export default function NavbarSimple() {
   return (
     <Navbar
       className="mx-auto px-6 py-3"
-      placeholder=""
     >
       <div className="flex items-center justify-between text-blue-gray-900">
         <Link to="/">
-          <img src={FlamezLogo} alt="Flamez Logo" className="w-28 h-fit" />
+          <img src={FlamezLogo} alt="Flamez Logo" className="w-28" />
         </Link>
         <div className="hidden lg:block">
           <NavList />

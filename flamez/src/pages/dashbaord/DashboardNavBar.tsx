@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 function NavList() {
   return (
     <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6 font-poppins">
-      <Typography
+      {/* <Typography
         as="li"
         variant="small"
         color="blue-gray"
@@ -26,7 +26,7 @@ function NavList() {
         >
           Dashboard
         </Link>
-      </Typography>
+      </Typography> */}
       <Typography
         as="li"
         variant="small"
@@ -53,7 +53,7 @@ function NavList() {
           Testamonials
         </Link>
       </Typography>
-      <Typography
+      {/* <Typography
         as="li"
         variant="small"
         color="blue-gray"
@@ -65,7 +65,7 @@ function NavList() {
         >
           Clients
         </Link>
-      </Typography>
+      </Typography> */}
       <Typography
         as="li"
         variant="small"

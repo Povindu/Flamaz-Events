@@ -9,31 +9,24 @@ export default function AdminRoutes() {
 
   const statusFunc = async () => {
     setStatus(user.userDetails.login);
-    
   };
 
-  
   useEffect(() => {
     statusFunc();
   }, []);
 
-
   useEffect(() => {
     statusFunc();
-    
   }, [user]);
 
-  useEffect(() => {
-    
-  }, [status]);
+  useEffect(() => {}, [status]);
 
   while (status == "default" || status == null) {
     return <></>;
   }
   if (status == true) {
-    return  <Dashboard />
-  }
-  else{
-    return <Navigate to="/login" replace />
+    return <Dashboard />;
+  } else {
+    return <Navigate to="/login" replace />;
   }
 }

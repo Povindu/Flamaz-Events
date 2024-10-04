@@ -4,12 +4,12 @@ import { Button } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 export default function Component() {
   return (
-    <Sidebar aria-label="Default sidebar example" className="w-fit m-auto">
-      <Sidebar.Items>
-        <Sidebar.ItemGroup>
-          <Sidebar.Item icon={HiChartPie}>
+    <Sidebar aria-label="Default sidebar example" className="w-fit m-auto" >
+      <Sidebar.Items >
+        <Sidebar.ItemGroup >
+          {/* <Sidebar.Item icon={HiChartPie}>
             <Link to="/dashboard">Dashboard</Link>
-          </Sidebar.Item>
+          </Sidebar.Item> */}
           {/* <Sidebar.Item href="#" icon={HiViewBoards} label="Pro" labelColor="dark">
             Kanban
           </Sidebar.Item> */}
@@ -19,9 +19,9 @@ export default function Component() {
           <Sidebar.Item icon={HiTable}>
             <Link to="/dashboard/testimonials">Testimonials</Link>
           </Sidebar.Item>
-          <Sidebar.Item icon={HiShoppingBag}>
+          {/* <Sidebar.Item icon={HiShoppingBag}>
             <Link to="/dashboard/clients">Clients</Link>
-          </Sidebar.Item>
+          </Sidebar.Item> */}
           <div className="flex justify-center">
             <Link to="/signup">
               <Button variant="outlined" color="deep-orange" className="mt-5">

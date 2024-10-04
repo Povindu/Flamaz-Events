@@ -28,6 +28,7 @@ export default function CreateService() {
         setRes((res: any[]) => [...res, res2.data]);
         setFile(null);
       } catch (error: any) {
+        console.log(error.message);
         alert(error.message);
       } finally {
         setLoading(false);
@@ -76,7 +77,7 @@ export default function CreateService() {
         )}
         {res.length > 0 && (
           <div className="mt-4">
-            {/* <p className="text-base">Uploaded files</p> */}
+
             <Typography variant="h6" color="blue-gray" className="">
               Uploaded files
             </Typography>
@@ -92,7 +93,6 @@ export default function CreateService() {
                     className="text-sm text-red-500"
                     onClick={() => setRes([])}
                   >
-                    {" "}
                     Remove
                   </button>
                 </div>
@@ -127,6 +127,7 @@ export default function CreateService() {
           return toast.error(res.data.error);
         }
         toast.success("Testimonial added successfully");
+        navigate("/dashboard/testimonials");
       })
       .catch((err) => {
         console.log(err);

@@ -42,7 +42,7 @@ const LoginPage = () => {
       while (user.userDetails.id == null) {
         return <div>Loading...</div>;
       }
-      navigate("/dashboard");
+      navigate("/dashboard/services");
     }
     setLoading(false);
   };

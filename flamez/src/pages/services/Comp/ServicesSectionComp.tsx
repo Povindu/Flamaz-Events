@@ -11,9 +11,6 @@ export default function ServicesSectionComp({
   description,
   imageLinks,
 }: Props) {
-  
-  
-  
   return (
     <div className="p-5">
       <Card className="mt-6 w-full">
@@ -34,7 +31,6 @@ export default function ServicesSectionComp({
 }
 
 export function DefaultGallery({ images }: { images: string[] }) {
-  
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
       {images.map((image, index) => (

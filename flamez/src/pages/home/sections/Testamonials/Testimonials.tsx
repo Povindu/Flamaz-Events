@@ -24,7 +24,7 @@ const data = [
     author: "Erandi Alahakoon",
     position: "Sakya Institute Nugegoda",
     image:
-      "https://res.cloudinary.com/dqurl8r48/image/upload/v1725275720/Testamonials%20Sample/inrsraxti6ttuucmg4jn.jpg" ,
+      "https://res.cloudinary.com/dqurl8r48/image/upload/v1725275720/Testamonials%20Sample/inrsraxti6ttuucmg4jn.jpg",
   },
   {
     id: 4,
@@ -55,7 +55,27 @@ const data = [
   },
 ];
 
+import React from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 export default function Testamonials() {
+  const baseUrl = import.meta.env.VITE_BACKEND_URL;
+  const [testimonial, setTestimonials] = useState([]);
+  // console.log(baseUrl);
+
+  useEffect(() => {
+    axios
+      .get(`${baseUrl}testimonials/getAll`)
+      .then((res) => {
+        console.log(res.data);
+        setTestimonials(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <div>
       <section className=" text-gray-800 mt-24">
@@ -65,30 +85,34 @@ export default function Testamonials() {
           </h1>
         </div>
         <div className="container flex flex-col items-center justify-center mx-auto w-full lg:w-full lg:flex-row lg:flex-wrap lg:justify-evenly lg:px-2">
-          {data.map((testimonial, index) => (
-            <div
-              className="flex flex-col max-w-sm mx-1 my-3 shadow-lg  "
-              key={index}
-            >
-              <div className="px-1 pt-6 pb-1 rounded-t-lg :bg-gray-50 h-60">
-                <p className="relative px-3 py-1 text-sm italic text-center text-gray-800">
-                  {testimonial.testimonial.substring(0, 400)}
-                  {testimonial.testimonial.length > 400 && "..."}
-                </p>
+          {testimonial ? (
+            testimonial.map((testimonial, index) => (
+              <div
+                className="flex flex-col max-w-sm mx-1 my-3 shadow-lg min-w-80"
+                key={index}
+              >
+                <div className="px-1 pt-6 pb-1 rounded-t-lg :bg-gray-50 h-64">
+                  <p className="relative px-3 py-1 text-sm italic text-center text-gray-800">
+                    {testimonial.description.substring(0, 400)}
+                    {testimonial.description.length > 400 && "..."}
+                  </p>
+                </div>
+                <div className="flex flex-col items-center justify-center p-6 rounded-b-lg bg-amber-100 text-black">
+                  <img
+                    src={testimonial.imageLink}
+                    alt=""
+                    className="w-16 h-16 mb-2 -mt-16 bg-center bg-cover rounded-full dark:bg-gray-300"
+                  />
+                  <p className="text-large font-semibold leading-tight">
+                    {testimonial.name}
+                  </p>
+                  <p className="text-sm">{testimonial.position}</p>
+                </div>
               </div>
-              <div className="flex flex-col items-center justify-center p-6 rounded-b-lg bg-amber-100 text-black">
-                <img
-                  src={testimonial.image}
-                  alt=""
-                  className="w-16 h-16 mb-2 -mt-16 bg-center bg-cover rounded-full dark:bg-gray-300"
-                />
-                <p className="text-large font-semibold leading-tight">
-                  {testimonial.author}
-                </p>
-                <p className="text-sm">{testimonial.position}</p>
-              </div>
-            </div>
-          ))}
+            ))
+          ) : (
+            <></>
+          )}
         </div>
       </section>
     </div>

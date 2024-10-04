@@ -1,7 +1,7 @@
 import api from "../../../../services/AuthService";
 import { useEffect, useState } from "react";
 import { Button } from "@material-tailwind/react";
-import DefaultTable from "../Comp/Table";
+import DefaultTable from "./Comp/Table";
 
 import { useNavigate } from "react-router-dom";
 
@@ -13,11 +13,10 @@ export default function Services() {
     api
       .get("services/getAll")
       .then((res) => {
-        
         setServices(res.data);
       })
       .catch((err) => {
-        
+        console.log(err);
       });
   }, []);
 
@@ -32,7 +31,7 @@ export default function Services() {
               className="float float-end"
               onClick={() => {
                 navigate("/dashboard/createService");
-                // 
+                //
               }}
             >
               Add Service

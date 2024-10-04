@@ -1,17 +1,21 @@
 import axios from "axios";
-// import { baseUrl } from "../constants/constants";
+import { useNavigate } from "react-router-dom";
+import { redirect } from "react-router-dom";
+
+// const redirectFunc = () => {
+//   console.log("Redirecting to login");
+//   const response = redirect("/434g34g565uyjty");
+//   return Object.defineProperty(response, "body", { value: true });
+// };
+
 const api = axios.create({
   baseURL: import.meta.env.VITE_BACKEND_URL,
-  // headers: {
-  //   "Access-Control-Allow-Origin": "*",
-  //   "Content-Type": "application/json",
-  // },
 });
 
 api.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
 // api.defaults.baseURL = baseUrl;
 
-// Add a request interceptor
+// Request interceptor
 api.interceptors.request.use(
   async (config) => {
     const token = localStorage.getItem("FLamezUserAT");
@@ -20,9 +24,7 @@ api.interceptors.request.use(
       //TODO: Redirect to login
       return config;
     }
-
     config.headers.Authorization = `Bearer ${token}`;
-
     return config;
   },
   (error) => {
@@ -30,6 +32,7 @@ api.interceptors.request.use(
   }
 );
 
+// Response interceptor
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
@@ -39,10 +42,8 @@ api.interceptors.response.use(
     // it means the token has expired and we need to refresh it
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
-
       try {
         const refreshToken = await localStorage.getItem("FLamezUserRT");
-
         const response = await axios.post(
           `${import.meta.env.VITE_BACKEND_URL}auth/refreshAT`,
           {
@@ -50,15 +51,19 @@ api.interceptors.response.use(
           }
         );
         const { token } = response.data;
-
         await localStorage.setItem("access-token", token);
 
         // Retry the original request with the new token
         originalRequest.headers.Authorization = `Bearer ${token}`;
         return axios(originalRequest);
       } catch (error) {
+        console.log(error);
+        if (error.response.status === 400) {
+          console.log("Refresh token expired");
+          // redirectFunc();
+          // return redirect("/dashboard");
+        }
         //TODO: Redirect to login
-        // Handle refresh token error or redirect to login
       }
     }
     return Promise.reject(error);

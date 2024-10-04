@@ -4,7 +4,7 @@ import Footer from "../../components/Footer.tsx";
 import NavbarSimple from "../../components/NavbarSimple.tsx";
 import OurServices from "./sections/OurServices/OurServices.tsx";
 import OurClients from "./sections/OurClients/OurClients.tsx";
-import Testamonials from "./sections/Testamonials/Testamonials.tsx";
+import Testamonials from "./sections/Testamonials/Testimonials.tsx";
 
 export default function home() {
   return (

@@ -1,25 +1,21 @@
 import { Card, Typography } from "@material-tailwind/react";
 import { Link, useNavigate } from "react-router-dom";
-import api from "../../../../services/AuthService";
+import api from "../../../../../services/AuthService";
 const TABLE_HEAD = ["Title", "Description", "Photos", "", ""];
 
 export default function DefaultTable({ data }: { data: any }) {
   const navigate = useNavigate();
 
   const handleDelete = async (id: string) => {
-    
     const res = await api
       .delete(`services/delete/${id}`)
       .then((res) => {
-        
         navigate("/dashboard");
       })
-      .catch((err) => {
-        
-      });
+      .catch((err) => {});
   };
 
-  // 
+  //
   return (
     <Card className="h-full overflow-scroll w-full font-poppins">
       <table className="w-full min-w-max table-auto text-center">

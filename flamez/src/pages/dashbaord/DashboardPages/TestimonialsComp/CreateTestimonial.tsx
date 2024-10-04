@@ -13,10 +13,8 @@ export default function CreateService() {
   const [loading, setLoading] = useState(false);
   const [res, setRes] = useState<any>([]);
   const handleSelectFile = (e: any) => setFile(e.target.files[0]);
-
-  const [photoArray, setPhotoArray] = useState<any>([]);
-
-  const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
+  const [position, setPosition] = useState("");
   const [description, setDescription] = useState("");
 
   const UploadComp = () => {
@@ -39,16 +37,20 @@ export default function CreateService() {
     return (
       <div className="font-poppins mt-3">
         <div className=" w-full flex flex-row  my-3 items-center">
-          <label
-            htmlFor="file"
-            className={`${
-              file
-                ? "bg-white border border-black text-black "
-                : "bg-gray-900 text-white"
-            } align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg   shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none`}
-          >
-            {file ? "Change image" : "Select image"}
-          </label>
+          {res.length == 0 ? (
+            <label
+              htmlFor="file"
+              className={`${
+                file
+                  ? "bg-white border border-black text-black "
+                  : "bg-gray-900 text-white"
+              } align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg   shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none`}
+            >
+              {file ? "Change the image" : "Select a image"}
+            </label>
+          ) : (
+            <></>
+          )}
 
           <input
             id="file"
@@ -86,6 +88,13 @@ export default function CreateService() {
                     alt=""
                     className="w-28 h-28 rounded-md"
                   />
+                  <button
+                    className="text-sm text-red-500"
+                    onClick={() => setRes([])}
+                  >
+                    {" "}
+                    Remove
+                  </button>
                 </div>
               ))}
             </div>
@@ -95,24 +104,32 @@ export default function CreateService() {
     );
   };
 
-  const submitService = async () => {
-    if (!title) {
-      return toast.warn("Please add a title");
+  const submitTestimonial = async () => {
+    if (!author) {
+      return toast.warn("Please add a author");
     }
+    console.log("author", author);
+    console.log("position", position);
+    console.log("description", description);
+    console.log("res", res);
 
-    res.map((r: any) => {
-      photoArray.push(r.secure_url);
-    });
+    const link = res[0].secure_url;
 
     api
-      .post("services/create", { title, description, photoArray })
+      .post("testimonials/create", {
+        name: author,
+        position,
+        description,
+        imageLink: link,
+      })
       .then((res) => {
         if (res.data.error) {
           return toast.error(res.data.error);
         }
-        toast.success("Service added successfully");
+        toast.success("Testimonial added successfully");
       })
       .catch((err) => {
+        console.log(err);
         toast.error("An error occured");
       });
     //
@@ -144,7 +161,7 @@ export default function CreateService() {
                 variant="h3"
                 className="text-lg font-semibold leading-10 text-gray-900"
               >
-                Add Service
+                Add Testimonial
               </Typography>
 
               <div>
@@ -156,10 +173,13 @@ export default function CreateService() {
                         color="blue-gray"
                         className="-mb-3"
                       >
-                        Title
+                        Author (Person or the company)
+                        <div className="text-red-500 text-xs font-normal inline ml-1">
+                          * Required
+                        </div>
                       </Typography>
                       <Input
-                        id="title"
+                        id="author"
                         size="lg"
                         placeholder="Ex: Light Equipment"
                         className="!border !border-gray-400 outline-none focus:!border-gray-900"
@@ -167,8 +187,8 @@ export default function CreateService() {
                           className: "before:content-none after:content-none",
                         }}
                         crossOrigin={undefined}
-                        onChange={(e) => setTitle(e.target.value)}
-                        value={title}
+                        onChange={(e) => setAuthor(e.target.value)}
+                        value={author}
                       />
 
                       <Typography
@@ -176,7 +196,31 @@ export default function CreateService() {
                         color="blue-gray"
                         className="-mb-3"
                       >
-                        Description
+                        Author's Position
+                      </Typography>
+                      <Input
+                        id="Position"
+                        size="lg"
+                        placeholder="We offer a versatile range of lighting solutions suitable for any events."
+                        className="!border !border-gray-400 outline-none focus:!border-gray-900"
+                        labelProps={{
+                          className: "before:content-none after:content-none",
+                        }}
+                        crossOrigin={undefined}
+                        onChange={(e) => setPosition(e.target.value)}
+                        value={position}
+                      />
+
+                      <Typography
+                        variant="h6"
+                        color="blue-gray"
+                        className="-mb-3"
+                      >
+                        Testimonial Description
+                        <div className="text-red-500 text-xs font-normal inline ml-1">
+                          {" "}
+                          *Required
+                        </div>
                       </Typography>
                       <Input
                         id="description"
@@ -191,6 +235,14 @@ export default function CreateService() {
                         value={description}
                       />
 
+                      <Typography
+                        variant="h6"
+                        color="blue-gray"
+                        className="-mb-8"
+                      >
+                        Image
+                      </Typography>
+
                       <UploadComp />
                     </div>
                   </form>
@@ -202,12 +254,12 @@ export default function CreateService() {
         <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
           <button
             type="button"
-            onClick={() => submitService()}
+            onClick={() => submitTestimonial()}
             className="inline-flex w-full justify-center rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 sm:ml-3 sm:w-auto"
           >
-            Add Service
+            Add Testimonial
           </button>
-          <Link to="/dashboard/services">
+          <Link to="/dashboard/testimonials">
             <button
               type="button"
               data-autofocus

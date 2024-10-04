@@ -17,7 +17,7 @@ export default function Component() {
             <Link to="/dashboard/services">Services</Link>
           </Sidebar.Item>
           <Sidebar.Item icon={HiTable}>
-            <Link to="/dashboard/testamonials">Testamonials</Link>
+            <Link to="/dashboard/testimonials">Testimonials</Link>
           </Sidebar.Item>
           <Sidebar.Item icon={HiShoppingBag}>
             <Link to="/dashboard/clients">Clients</Link>

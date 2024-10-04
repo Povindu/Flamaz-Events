@@ -1,23 +1,44 @@
-import React from "react";
+import { useParams } from "react-router-dom";
 import api from "../../../../services/AuthService";
 import { useEffect, useState } from "react";
 import { Button, Card, Input, Typography } from "@material-tailwind/react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function CreateService() {
-  const navigate = useNavigate();
+export default function EditService() {
+  const { id } = useParams();
 
   const [file, setFile] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [res, setRes] = useState<any>([]);
   const handleSelectFile = (e: any) => setFile(e.target.files[0]);
-
-  const [photoArray, setPhotoArray] = useState<any>([]);
+  const [photoArray] = useState<any>([]);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+
+  const [services, setServices] = useState<any>([]);
+
+  useEffect(() => {
+    api
+      .get(`services/getOne/${id}`)
+      .then((response) => {
+        setServices(response.data);
+        setTitle(response.data.title);
+        setDescription(response.data.description);
+        setRes([]);
+        if (response.data.photoArray) {
+          response.data?.photoArray?.map((r: any) => {
+            setRes((res: any[]) => [...res, { url: r, secure_url: r }]);
+          });
+        }
+        // setPhotoArray(res.data.photoArray);
+      })
+      .catch((err) => {});
+  }, [id]);
+
+  useEffect(() => {}, [res]);
 
   const UploadComp = () => {
     const handleUpload = async () => {
@@ -80,7 +101,7 @@ export default function CreateService() {
             </Typography>
             <div className="grid grid-cols-3 gap-1 mt-2">
               {res.map((r: any) => (
-                <div key={r.public_id} className=" w-28 h-28 ">
+                <div key={r.secure_url} className=" w-28 h-28 ">
                   <img
                     src={r.secure_url}
                     alt=""
@@ -105,7 +126,7 @@ export default function CreateService() {
     });
 
     api
-      .post("services/create", { title, description, photoArray })
+      .patch(`services/edit/${id}`, { title, description, photoArray })
       .then((res) => {
         if (res.data.error) {
           return toast.error(res.data.error);
@@ -115,7 +136,6 @@ export default function CreateService() {
       .catch((err) => {
         toast.error("An error occured");
       });
-    //
   };
 
   return (
@@ -144,7 +164,7 @@ export default function CreateService() {
                 variant="h3"
                 className="text-lg font-semibold leading-10 text-gray-900"
               >
-                Add Service
+                Edit Service
               </Typography>
 
               <div>
@@ -205,7 +225,7 @@ export default function CreateService() {
             onClick={() => submitService()}
             className="inline-flex w-full justify-center rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 sm:ml-3 sm:w-auto"
           >
-            Add Service
+            Edit Service
           </button>
           <Link to="/dashboard/services">
             <button

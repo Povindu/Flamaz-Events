@@ -57,7 +57,7 @@ export default function OurClients() {
           Our <span className="text-amber-500">Clients</span>
         </h1>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-6">
+        <div className="hidden sm:grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
           {data.map(({ imageLink }, index) => (
             <div key={index}>
               <img
@@ -67,6 +67,22 @@ export default function OurClients() {
               />
             </div>
           ))}
+        </div>
+
+        <div className="flex overflow-scroll pb-10 sm:hidden">
+          <div className="flex flex-nowrap ml-5 text-center text-xl">
+            {data.map(({ imageLink }, index) => (
+              <div key={index} className="inline-block px-5">
+                <div className="w-60 h-60 max-w-xs overflow-hidden rounded-lg shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out">
+                  <img
+                    className="h-40 w-full max-w-full rounded-lg object-contain object-center"
+                    src={imageLink}
+                    alt="gallery-photo"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

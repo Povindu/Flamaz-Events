@@ -12,6 +12,7 @@ import CreateService from "../pages/dashbaord/DashboardPages/ServiceComp/CreateS
 import EditService from "../pages/dashbaord/DashboardPages/ServiceComp/EditService";
 import CreateTestimonial from "../pages/dashbaord/DashboardPages/TestimonialsComp/CreateTestimonial";
 import EditTestimonial from "../pages/dashbaord/DashboardPages/TestimonialsComp/EditTestimonial";
+import ContactUs from "../pages/contactUs/contatcUs";
 
 import AdminRoutes from "./AdminRoutes";
 
@@ -27,6 +28,7 @@ const router = createBrowserRouter([
       { path: "signup", element: <Signup /> },
       { path: "gallery", element: <Gallery /> },
       { path: "services", element: <Services /> },
+      { path: "contactus", element: <ContactUs /> },
       {
         path: "dashboard",
         children: [

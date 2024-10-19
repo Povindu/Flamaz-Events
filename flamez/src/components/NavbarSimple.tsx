@@ -52,7 +52,7 @@ function NavList() {
           Gallery
         </Link>
       </Typography>
-      <Typography
+      {/* <Typography
         as="li"
         variant="small"
         color="blue-gray"
@@ -64,19 +64,19 @@ function NavList() {
         >
           About Us
         </a>
-      </Typography>
+      </Typography> */}
       <Typography
         as="li"
         variant="small"
         color="blue-gray"
         className="p-1 font-medium"
       >
-        <a
-          href="#"
+        <Link
+          to="/contactus"
           className="flex items-center text-black hover:text-amber-500 transition-colors"
         >
           Contact Us
-        </a>
+        </Link>
       </Typography>
     </ul>
   );
@@ -97,9 +97,7 @@ export default function NavbarSimple() {
   }, []);
 
   return (
-    <Navbar
-      className="mx-auto px-6 py-3"
-    >
+    <Navbar className="mx-auto px-6 py-3">
       <div className="flex items-center justify-between text-blue-gray-900">
         <Link to="/">
           <img src={FlamezLogo} alt="Flamez Logo" className="w-28" />

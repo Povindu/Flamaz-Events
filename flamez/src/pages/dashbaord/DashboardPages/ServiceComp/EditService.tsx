@@ -33,7 +33,6 @@ export default function EditService() {
             setRes((res: any[]) => [...res, { url: r, secure_url: r }]);
           });
         }
-        // setPhotoArray(res.data.photoArray);
       })
       .catch((err) => {});
   }, [id]);
@@ -41,6 +40,9 @@ export default function EditService() {
   useEffect(() => {}, [res]);
 
   const UploadComp = () => {
+    const handleRemove = (url: string) => {
+      setRes((prev: any[]) => prev.filter((img: any) => img.secure_url !== url));
+    };
     const handleUpload = async () => {
       try {
         setLoading(true);
@@ -101,12 +103,20 @@ export default function EditService() {
             </Typography>
             <div className="grid grid-cols-3 gap-1 mt-2">
               {res.map((r: any) => (
-                <div key={r.secure_url} className=" w-28 h-28 ">
+                <div key={r.secure_url} className="w-28 h-28 relative">
                   <img
                     src={r.secure_url}
-                    alt=""
-                    className="w-28 h-28 rounded-md"
+                    alt="uploaded"
+                    className="w-28 h-28 rounded-md object-cover"
                   />
+                  <button
+                    type="button"
+                    aria-label="Remove image"
+                    onClick={() => handleRemove(r.secure_url)}
+                    className="absolute -top-2 -right-2 bg-black text-white rounded-full w-6 h-6 flex items-center justify-center text-xs shadow hover:bg-gray-700"
+                  >
+                    ×
+                  </button>
                 </div>
               ))}
             </div>

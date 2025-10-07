@@ -8,11 +8,7 @@ export default function footer() {
     <div className="bg-zinc-900 text-white  text-sm pt-12 font-poppins">
       <div className="grid lg:grid-cols-3 grid-row-3 text-center align-middle mb-10">
         <div className="pt-12 text-lg">
-          <img
-            src={FlamezLogo}
-            alt="Flamez Logo"
-            className="w-28 m-auto"
-          />
+          <img src={FlamezLogo} alt="Flamez Logo" className="w-28 m-auto" />
           <p className="w-full m-auto leading-5">
             <span className="text-amber-500">Flamez</span> Events & <br />
             Entertainment
@@ -48,7 +44,7 @@ export default function footer() {
         </div>
       </div>
       <div className="text-center text-xs pb-2">
-        © 2024 Flamez Events. All rights reserved
+        © 2025 Flamez Events. All rights reserved
       </div>
     </div>
   );

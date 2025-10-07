@@ -11,10 +11,10 @@ export const useSignup = () => {
     email,
     password,
   }: {
-    firstName: String;
-    lastName: String;
-    email: String;
-    password: String;
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
   }) => {
     const res = await axios
       .post(baseUrl + `auth/signup`, {

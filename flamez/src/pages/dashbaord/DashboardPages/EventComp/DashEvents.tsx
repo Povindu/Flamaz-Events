@@ -1,20 +1,19 @@
 import api from "../../../../services/AuthService";
 import { useEffect, useState } from "react";
 import { Button } from "@material-tailwind/react";
-import DefaultTable from "./Comp/Table";
+import DefaultTable from "../../../../components/Table";
 
 import { useNavigate } from "react-router-dom";
 
-export default function Testimonials() {
+export default function Events() {
   const navigate = useNavigate();
-  const [testimonials, setTestimonials] = useState<any>([]);
+  const [events, setEvents] = useState<any>([]);
 
   useEffect(() => {
     api
-      .get("testimonials/getAll")
+      .get("events/getAll")
       .then((res) => {
-        // console.log(res.data);
-        setTestimonials(res.data);
+        setEvents(res.data);
       })
       .catch((err) => {
         // console.log(err);
@@ -25,24 +24,22 @@ export default function Testimonials() {
     <>
       <div className="w-full">
         <div className="h-16 flex flex-row justify-between items-center px-4">
-          <p className="text-lg font-poppins uppercase">
-            Add or Edit Testimonials
-          </p>
+          <p className="text-lg font-poppins uppercase">Add or Edit Events</p>
           <div className=" align-middle justify-center">
             <Button
               variant="filled"
               className="float float-end"
               onClick={() => {
-                navigate("/dashboard/createTestimonial");
+                navigate("/dashboard/createEvent");
                 //
               }}
             >
-              Add Testimonial
+              Add Event
             </Button>
           </div>
         </div>
 
-        <DefaultTable data={testimonials} />
+        <DefaultTable data={events} path={"event"} />
       </div>
     </>
   );

@@ -28,7 +28,7 @@ export default function CreateService() {
         setRes((res: any[]) => [...res, res2.data]);
         setFile(null);
       } catch (error: any) {
-        console.log(error.message);
+        // console.log(error.message);
         alert(error.message);
       } finally {
         setLoading(false);
@@ -108,10 +108,6 @@ export default function CreateService() {
     if (!author) {
       return toast.warn("Please add a author");
     }
-    console.log("author", author);
-    console.log("position", position);
-    console.log("description", description);
-    console.log("res", res);
 
     const link = res[0].secure_url;
 
@@ -130,7 +126,7 @@ export default function CreateService() {
         navigate("/dashboard/testimonials");
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         toast.error("An error occured");
       });
     //

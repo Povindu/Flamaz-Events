@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function EditTestimonial() {
+export default function EditEvent() {
   const { id } = useParams();
 
   const [file, setFile] = useState<any>(null);
@@ -15,23 +15,25 @@ export default function EditTestimonial() {
   const handleSelectFile = (e: any) => setFile(e.target.files[0]);
   const [photoArray] = useState<any>([]);
 
-  const [name, setName] = useState("");
-  const [position, setPosition] = useState("");
+  const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+
+  const [events, setEvents] = useState<any>([]);
 
   useEffect(() => {
     api
-      .get(`testimonials/getOne/${id}`)
+      .get(`events/getOne/${id}`)
       .then((response) => {
-        setName(response.data.name);
+        setEvents(response.data);
+        setTitle(response.data.title);
         setDescription(response.data.description);
-        setPosition(response.data.position);
         setRes([]);
         if (response.data.photoArray) {
           response.data?.photoArray?.map((r: any) => {
             setRes((res: any[]) => [...res, { url: r, secure_url: r }]);
           });
         }
+        // setPhotoArray(res.data.photoArray);
       })
       .catch((err) => {});
   }, [id]);
@@ -114,13 +116,9 @@ export default function EditTestimonial() {
     );
   };
 
-  const submitTestimonial = async () => {
-    if (!name) {
-      return toast.warn("Please add a name");
-    }
-
-    if (!position) {
-      return toast.warn("Please add a Position");
+  const submitEvent = async () => {
+    if (!title) {
+      return toast.warn("Please add a title");
     }
 
     res.map((r: any) => {
@@ -128,12 +126,12 @@ export default function EditTestimonial() {
     });
 
     api
-      .patch(`testimonials/edit/${id}`, { name, position, description, photoArray })
+      .patch(`events/edit/${id}`, { title, description, photoArray })
       .then((res) => {
         if (res.data.error) {
           return toast.error(res.data.error);
         }
-        toast.success("Testimonial added successfully");
+        toast.success("Event added successfully");
       })
       .catch((err) => {
         toast.error("An error occured");
@@ -166,7 +164,7 @@ export default function EditTestimonial() {
                 variant="h3"
                 className="text-lg font-semibold leading-10 text-gray-900"
               >
-                Edit Testimonial
+                Edit Event
               </Typography>
 
               <div>
@@ -178,10 +176,10 @@ export default function EditTestimonial() {
                         color="blue-gray"
                         className="-mb-3"
                       >
-                        Name
+                        Title
                       </Typography>
                       <Input
-                        id="name"
+                        id="title"
                         size="lg"
                         placeholder="Ex: Light Equipment"
                         className="!border !border-gray-400 outline-none focus:!border-gray-900"
@@ -189,28 +187,8 @@ export default function EditTestimonial() {
                           className: "before:content-none after:content-none",
                         }}
                         crossOrigin={undefined}
-                        onChange={(e) => setName(e.target.value)}
-                        value={name}
-                      />
-
-                      <Typography
-                        variant="h6"
-                        color="blue-gray"
-                        className="-mb-3"
-                      >
-                        Position
-                      </Typography>
-                      <Input
-                        id="position"
-                        size="lg"
-                        placeholder="Ex: Light Equipment"
-                        className="!border !border-gray-400 outline-none focus:!border-gray-900"
-                        labelProps={{
-                          className: "before:content-none after:content-none",
-                        }}
-                        crossOrigin={undefined}
-                        onChange={(e) => setPosition(e.target.value)}
-                        value={position}
+                        onChange={(e) => setTitle(e.target.value)}
+                        value={title}
                       />
 
                       <Typography
@@ -244,12 +222,12 @@ export default function EditTestimonial() {
         <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
           <button
             type="button"
-            onClick={() => submitTestimonial()}
+            onClick={() => submitEvent()}
             className="inline-flex w-full justify-center rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 sm:ml-3 sm:w-auto"
           >
-            Edit Testimonial
+            Edit Event
           </button>
-          <Link to="/dashboard/testimonials">
+          <Link to="/dashboard/events">
             <button
               type="button"
               data-autofocus

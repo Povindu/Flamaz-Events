@@ -1,19 +1,20 @@
 import NavbarSimple from "../../components/NavbarSimple";
-import InfoCard2 from "../../components/InfoCard";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export default function Services() {
-  const [services, setServices] = useState<any>([]);
+import InfoCard2 from "../../components/InfoCard";
+
+export default function Events() {
+  const [events, setEvents] = useState<any>([]);
 
   const baseUrl = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     axios
-      .get(`${baseUrl}services/getAll`)
+      .get(`${baseUrl}events/getAll`)
       .then((res) => {
         console.log(res.data);
-        setServices(res.data);
+        setEvents(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -24,10 +25,10 @@ export default function Services() {
     <div>
       <NavbarSimple />
 
-      {services.length > 0 &&
-        services.map(
+      {events.length > 0 &&
+        events.map(
           (
-            serviceItem: {
+            eventItem: {
               title: string;
               description: string;
               photoArray: string[];
@@ -37,9 +38,9 @@ export default function Services() {
             return (
               <InfoCard2
                 key={index}
-                title={serviceItem.title}
-                description={serviceItem.description}
-                imageLinks={serviceItem.photoArray}
+                title={eventItem.title}
+                description={eventItem.description}
+                imageLinks={eventItem.photoArray}
               />
             );
           }

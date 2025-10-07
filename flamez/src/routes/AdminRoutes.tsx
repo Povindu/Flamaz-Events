@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useUser } from "../context/authContext";
 import { Navigate } from "react-router-dom";
 import Dashboard from "../pages/dashbaord/DashboardHome";
+import { Spinner } from "@material-tailwind/react";
 
 export default function AdminRoutes() {
   const user = useUser();
@@ -13,20 +14,18 @@ export default function AdminRoutes() {
 
   useEffect(() => {
     statusFunc();
-  }, []);
-
-  useEffect(() => {
-    statusFunc();
   }, [user]);
 
-  useEffect(() => {}, [status]);
+  return (
+    <div>
+      {status == "default" || status == null ? (
+        <Spinner />
+      ) : status == true ? (
+        <Dashboard />
+      ) : (
+        <Navigate to="/login" replace />
+      )}
+    </div>
+  );
 
-  while (status == "default" || status == null) {
-    return <></>;
-  }
-  if (status == true) {
-    return <Dashboard />;
-  } else {
-    return <Navigate to="/login" replace />;
-  }
 }

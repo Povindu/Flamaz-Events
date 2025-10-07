@@ -17,9 +17,7 @@ const LoginPage = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    
-    if(user.userDetails.id !== ''){
-      
+    if (user.userDetails.id !== "") {
       navigate("/dashboard");
     }
   }, [user]);
@@ -31,14 +29,14 @@ const LoginPage = () => {
     }
 
     setLoading(true);
-    
+
     const loginMsg = await login({ email: email, password: password });
-    
+
     if (loginMsg.error) {
       toast.error(loginMsg.error);
     } else {
       toast.success("Login Successful");
-      
+
       while (user.userDetails.id == null) {
         return <div>Loading...</div>;
       }
@@ -76,7 +74,6 @@ const LoginPage = () => {
                 type="email"
                 required
               />
-              {/* <p className=" text-red-500 h-6 border border-black"> Error </p> */}
             </div>
             <div className="mt-4 flex flex-col justify-between">
               <div className="flex justify-between">
@@ -89,8 +86,6 @@ const LoginPage = () => {
                 className="text-gray-700 border border-gray-300 rounded py-2 px-4 block w-full focus:outline-2 focus:outline-blue-700"
                 type="password"
               />
-
-              {/* <p className=" text-red-500 h-6 border border-black"> Error </p> */}
               <a
                 href="#"
                 className="text-xs text-gray-500 hover:text-gray-900 text-end w-full mt-2"
@@ -108,13 +103,9 @@ const LoginPage = () => {
             </div>
 
             <div className="mt-4 flex items-center w-full text-center">
-              <Link
-                to="/signup"
-                className="text-xs text-gray-500 capitalize text-center w-full"
-              >
-                Don&apos;t have any account yet?
-                <span className="text-blue-700"> Sign Up</span>
-              </Link>
+              <p className="text-xs text-gray-500 text-center w-full">
+                Don't have any account yet? Contact an admin to create a account
+              </p>
             </div>
           </div>
         </div>

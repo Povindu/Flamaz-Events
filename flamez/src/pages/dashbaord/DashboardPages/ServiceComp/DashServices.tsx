@@ -1,7 +1,7 @@
 import api from "../../../../services/AuthService";
 import { useEffect, useState } from "react";
 import { Button } from "@material-tailwind/react";
-import DefaultTable from "./Comp/Table";
+import DefaultTable from "../../../../components/Table";
 
 import { useNavigate } from "react-router-dom";
 
@@ -16,7 +16,7 @@ export default function Services() {
         setServices(res.data);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   }, []);
 
@@ -39,7 +39,7 @@ export default function Services() {
           </div>
         </div>
 
-        <DefaultTable data={services} />
+        <DefaultTable data={services} path={"service"} />
       </div>
     </>
   );

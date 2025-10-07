@@ -95,7 +95,7 @@ export default function DefaultTable({ data }: { data: any }) {
                     </Typography>
                   </td>
                   <td className={classes}>
-                    <Link to={`/dashboard/editService/${_id}`}>
+                    <Link to={`/dashboard/editTestimonial/${_id}`}>
                       <Typography
                         as="a"
                         href="#"

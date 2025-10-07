@@ -9,8 +9,8 @@ export const useLogin = () => {
     email,
     password,
   }: {
-    email: String;
-    password: String;
+    email: string;
+    password: string;
   }) => {
     const res = await axios
       .post(baseUrl + `auth/signin`, {
@@ -18,7 +18,7 @@ export const useLogin = () => {
         password,
       })
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         localStorage.setItem(
           "FLamezUserAT",
           JSON.stringify(response.data.token)
@@ -33,7 +33,7 @@ export const useLogin = () => {
         return { status: "success", data: response.data, error: "" };
       })
       .catch((error) => {
-        console.log(error.response);
+        // console.log(error.response);
 
         if (error.response.status === 404) {
           return {

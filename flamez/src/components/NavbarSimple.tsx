@@ -46,25 +46,12 @@ function NavList() {
         className="p-1 font-medium"
       >
         <Link
-          to="/gallery"
+          to="/events"
           className="flex items-center text-black hover:text-amber-500 transition-colors"
         >
-          Gallery
+          Events
         </Link>
       </Typography>
-      {/* <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-medium"
-      >
-        <a
-          href="#"
-          className="flex items-center text-black hover:text-amber-500 transition-colors"
-        >
-          About Us
-        </a>
-      </Typography> */}
       <Typography
         as="li"
         variant="small"

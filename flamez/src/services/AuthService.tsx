@@ -1,6 +1,4 @@
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { redirect } from "react-router-dom";
 
 // const redirectFunc = () => {
 //   console.log("Redirecting to login");
@@ -12,60 +10,117 @@ const api = axios.create({
   baseURL: import.meta.env.VITE_BACKEND_URL,
 });
 
-api.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
-// api.defaults.baseURL = baseUrl;
+// Where to send users if login/refresh fails
+const LOGIN_PATH = "/";
+
+// Prevent multiple concurrent refresh calls
+let isRefreshing = false;
+let refreshSubscribers: Array<(token: string) => void> = [];
+
+const subscribeTokenRefresh = (callback: (token: string) => void) => {
+  refreshSubscribers.push(callback);
+};
+
+const onRefreshed = (token: string) => {
+  refreshSubscribers.forEach((callback) => callback(token));
+  refreshSubscribers = [];
+};
 
 // Request interceptor
 api.interceptors.request.use(
   async (config) => {
     const token = localStorage.getItem("FLamezUserAT");
-    console.log(token);
-    if (!token) {
-      //TODO: Redirect to login
-      return config;
+    if (!config.headers) {
+      config.headers = {} as any;
     }
-    config.headers.Authorization = `Bearer ${token}`;
+    if (token) {
+      (config.headers as any).Authorization = `Bearer ${token}`;
+    }
     return config;
   },
-  (error) => {
-    Promise.reject(error);
-  }
+  (error) => Promise.reject(error)
 );
 
 // Response interceptor
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
-    const originalRequest = error.config;
+    const originalRequest = error?.config || {};
+    const status = error?.response?.status;
+    const requestUrl: string = String(originalRequest?.url || "");
 
-    // If the error status is 401 and there is no originalRequest._retry flag,
-    // it means the token has expired and we need to refresh it
-    if (error.response.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
+    // Network/unknown error: just bubble up
+    if (!status) {
+      return Promise.reject(error);
+    }
+
+    // If login endpoint itself fails with 401, send user home immediately
+    if (status === 401 && /(^|\/)auth\/(login|signin)(\/|$)/i.test(requestUrl)) {
       try {
-        const refreshToken = await localStorage.getItem("FLamezUserRT");
-        const response = await axios.post(
-          `${import.meta.env.VITE_BACKEND_URL}auth/refreshAT`,
-          {
-            refreshToken,
-          }
-        );
-        const { token } = response.data;
-        await localStorage.setItem("access-token", token);
+        window.location.assign(LOGIN_PATH);
+      } catch {
+        void 0;
+      }
+      return Promise.reject(error);
+    }
 
-        // Retry the original request with the new token
-        originalRequest.headers.Authorization = `Bearer ${token}`;
-        return axios(originalRequest);
-      } catch (error) {
-        console.log(error);
-        if (error.response.status === 400) {
-          console.log("Refresh token expired");
-          // redirectFunc();
-          // return redirect("/dashboard");
+    // Unauthorized: try refresh once per request
+    if (status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+
+      const performRetry = (newToken: string) => {
+        if (!originalRequest.headers) {
+          originalRequest.headers = {};
         }
-        //TODO: Redirect to login
+        originalRequest.headers.Authorization = `Bearer ${newToken}`;
+        return axios(originalRequest);
+      };
+
+      if (isRefreshing) {
+        return new Promise((resolve, reject) => {
+          subscribeTokenRefresh((token: string) => {
+            performRetry(token).then(resolve).catch(reject);
+          });
+        });
+      }
+
+      isRefreshing = true;
+      try {
+        const refreshToken = localStorage.getItem("FLamezUserRT");
+        if (!refreshToken) {
+          throw new Error("Missing refresh token");
+        }
+
+        const baseUrl = api.defaults.baseURL || import.meta.env.VITE_BACKEND_URL || "";
+        const refreshUrl = `${String(baseUrl).replace(/\/$/, "")}/auth/refreshAT`;
+
+        const response = await axios.post(refreshUrl, { refreshToken });
+        const { token } = response.data;
+
+        // Persist and set default header for subsequent requests
+        localStorage.setItem("FLamezUserAT", token);
+        api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+        onRefreshed(token);
+        return performRetry(token);
+      } catch (refreshError: any) {
+        // If refresh fails (e.g., 400), clear tokens and optionally redirect
+        localStorage.removeItem("FLamezUserAT");
+        localStorage.removeItem("FLamezUserRT");
+
+        if (refreshError?.response?.status === 400 || refreshError?.response?.status === 401) {
+          try {
+            window.location.assign(LOGIN_PATH);
+          } catch {
+            void 0; // ignore navigation errors
+          }
+        }
+        return Promise.reject(refreshError);
+      } finally {
+        isRefreshing = false;
       }
     }
+
     return Promise.reject(error);
   }
 );

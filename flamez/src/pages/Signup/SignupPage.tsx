@@ -28,11 +28,11 @@ const SignupPage = () => {
       toast.warn("Please fill all the fields");
       return;
     }
-    if( email === "" || !email.includes("@") || !email.includes(".")){
+    if (email === "" || !email.includes("@") || !email.includes(".")) {
       toast.warn("Please enter a valid email address");
       return;
     }
-    if(password.length < 6){
+    if (password.length < 6) {
       toast.warn("Password must be at least 6 characters");
       return;
     }
@@ -48,8 +48,6 @@ const SignupPage = () => {
       email: email,
       password: password,
     });
-
-    
 
     if (SignupMsg.error) {
       toast.error(SignupMsg.error);

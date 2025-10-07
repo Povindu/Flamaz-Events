@@ -1,42 +1,23 @@
-import { useParams } from "react-router-dom";
+import React from "react";
 import api from "../../../../services/AuthService";
 import { useEffect, useState } from "react";
 import { Button, Card, Input, Typography } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function EditTestimonial() {
-  const { id } = useParams();
+export default function CreateEvent() {
+  const navigate = useNavigate();
 
   const [file, setFile] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [res, setRes] = useState<any>([]);
   const handleSelectFile = (e: any) => setFile(e.target.files[0]);
-  const [photoArray] = useState<any>([]);
 
-  const [name, setName] = useState("");
-  const [position, setPosition] = useState("");
+  const [photoArray, setPhotoArray] = useState<any>([]);
+
+  const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-
-  useEffect(() => {
-    api
-      .get(`testimonials/getOne/${id}`)
-      .then((response) => {
-        setName(response.data.name);
-        setDescription(response.data.description);
-        setPosition(response.data.position);
-        setRes([]);
-        if (response.data.photoArray) {
-          response.data?.photoArray?.map((r: any) => {
-            setRes((res: any[]) => [...res, { url: r, secure_url: r }]);
-          });
-        }
-      })
-      .catch((err) => {});
-  }, [id]);
-
-  useEffect(() => {}, [res]);
 
   const UploadComp = () => {
     const handleUpload = async () => {
@@ -99,7 +80,7 @@ export default function EditTestimonial() {
             </Typography>
             <div className="grid grid-cols-3 gap-1 mt-2">
               {res.map((r: any) => (
-                <div key={r.secure_url} className=" w-28 h-28 ">
+                <div key={r.public_id} className=" w-28 h-28 ">
                   <img
                     src={r.secure_url}
                     alt=""
@@ -114,13 +95,9 @@ export default function EditTestimonial() {
     );
   };
 
-  const submitTestimonial = async () => {
-    if (!name) {
-      return toast.warn("Please add a name");
-    }
-
-    if (!position) {
-      return toast.warn("Please add a Position");
+  const submitEvent = async () => {
+    if (!title) {
+      return toast.warn("Please add a title");
     }
 
     res.map((r: any) => {
@@ -128,16 +105,17 @@ export default function EditTestimonial() {
     });
 
     api
-      .patch(`testimonials/edit/${id}`, { name, position, description, photoArray })
+      .post("events/create", { title, description, photoArray })
       .then((res) => {
         if (res.data.error) {
           return toast.error(res.data.error);
         }
-        toast.success("Testimonial added successfully");
+        toast.success("Event added successfully");
       })
       .catch((err) => {
         toast.error("An error occured");
       });
+    //
   };
 
   return (
@@ -166,7 +144,7 @@ export default function EditTestimonial() {
                 variant="h3"
                 className="text-lg font-semibold leading-10 text-gray-900"
               >
-                Edit Testimonial
+                Add Event
               </Typography>
 
               <div>
@@ -178,39 +156,19 @@ export default function EditTestimonial() {
                         color="blue-gray"
                         className="-mb-3"
                       >
-                        Name
+                        Event Name
                       </Typography>
                       <Input
-                        id="name"
+                        id="title"
                         size="lg"
-                        placeholder="Ex: Light Equipment"
+                        placeholder="Ex: Flamez Get Together 2025"
                         className="!border !border-gray-400 outline-none focus:!border-gray-900"
                         labelProps={{
                           className: "before:content-none after:content-none",
                         }}
                         crossOrigin={undefined}
-                        onChange={(e) => setName(e.target.value)}
-                        value={name}
-                      />
-
-                      <Typography
-                        variant="h6"
-                        color="blue-gray"
-                        className="-mb-3"
-                      >
-                        Position
-                      </Typography>
-                      <Input
-                        id="position"
-                        size="lg"
-                        placeholder="Ex: Light Equipment"
-                        className="!border !border-gray-400 outline-none focus:!border-gray-900"
-                        labelProps={{
-                          className: "before:content-none after:content-none",
-                        }}
-                        crossOrigin={undefined}
-                        onChange={(e) => setPosition(e.target.value)}
-                        value={position}
+                        onChange={(e) => setTitle(e.target.value)}
+                        value={title}
                       />
 
                       <Typography
@@ -223,7 +181,7 @@ export default function EditTestimonial() {
                       <Input
                         id="description"
                         size="lg"
-                        placeholder="We offer a versatile range of lighting solutions suitable for any events."
+                        placeholder="Annual Get Together of Flamez Events"
                         className="!border !border-gray-400 outline-none focus:!border-gray-900"
                         labelProps={{
                           className: "before:content-none after:content-none",
@@ -244,12 +202,12 @@ export default function EditTestimonial() {
         <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
           <button
             type="button"
-            onClick={() => submitTestimonial()}
+            onClick={() => submitEvent()}
             className="inline-flex w-full justify-center rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 sm:ml-3 sm:w-auto"
           >
-            Edit Testimonial
+            Add Event
           </button>
-          <Link to="/dashboard/testimonials">
+          <Link to="/dashboard/events">
             <button
               type="button"
               data-autofocus
